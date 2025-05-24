@@ -311,7 +311,7 @@
             </div>
             <div class="main" id="new-books">
                 <div class="heading-searchBox">
-                    <h1 class="heading">All Books</h1>
+                    <h1 class="heading">New Books</h1>
                     <form class="search-form" onsubmit="event.preventDefault(); search();">
                         <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
                         <button class="submit" type="submit">
@@ -361,7 +361,7 @@
             </div>
             <div class="main" id="best-sellers">
                 <div class="heading-searchBox">
-                    <h1 class="heading">All Books</h1>
+                    <h1 class="heading">Best Sellers</h1>
                     <form class="search-form" onsubmit="event.preventDefault(); search();">
                         <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
                         <button class="submit" type="submit">
@@ -374,7 +374,7 @@
             </div>
             <div class="main" id="fiction">
                 <div class="heading-searchBox">
-                    <h1 class="heading">All Books</h1>
+                    <h1 class="heading">Fiction</h1>
                     <form class="search-form" onsubmit="event.preventDefault(); search();">
                         <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
                         <button class="submit" type="submit">
@@ -424,7 +424,7 @@
             </div>
             <div class="main" id="non-fiction">
                 <div class="heading-searchBox">
-                    <h1 class="heading">All Books</h1>
+                    <h1 class="heading">Young Adult</h1>
                     <form class="search-form" onsubmit="event.preventDefault(); search();">
                         <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
                         <button class="submit" type="submit">
@@ -474,7 +474,7 @@
             </div>
             <div class="main" id="young-adult">
                 <div class="heading-searchBox">
-                    <h1 class="heading">All Books</h1>
+                    <h1 class="heading">Children's</h1>
                     <form class="search-form" onsubmit="event.preventDefault(); search();">
                         <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
                         <button class="submit" type="submit">
@@ -524,7 +524,7 @@
             </div>
             <div class="main" id="children">
                 <div class="heading-searchBox">
-                    <h1 class="heading">All Books</h1>
+                    <h1 class="heading">Graphic Novels & Comics</h1>
                     <form class="search-form" onsubmit="event.preventDefault(); search();">
                         <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
                         <button class="submit" type="submit">
@@ -574,7 +574,7 @@
             </div>
             <div class="main" id="graphic-novels-comics">
                 <div class="heading-searchBox">
-                    <h1 class="heading">All Books</h1>
+                    <h1 class="heading">Poetry</h1>
                     <form class="search-form" onsubmit="event.preventDefault(); search();">
                         <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
                         <button class="submit" type="submit">
@@ -624,7 +624,7 @@
             </div>
             <div class="main" id="poetry">
                 <div class="heading-searchBox">
-                    <h1 class="heading">All Books</h1>
+                    <h1 class="heading">Drama & Plays</h1>
                     <form class="search-form" onsubmit="event.preventDefault(); search();">
                         <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
                         <button class="submit" type="submit">
@@ -674,7 +674,7 @@
             </div>
             <div class="main" id="drama-plays">
                 <div class="heading-searchBox">
-                    <h1 class="heading">All Books</h1>
+                    <h1 class="heading">Religious & Spiritual</h1>
                     <form class="search-form" onsubmit="event.preventDefault(); search();">
                         <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
                         <button class="submit" type="submit">
@@ -724,7 +724,7 @@
             </div>
             <div class="main" id="religious-spiritual">
                 <div class="heading-searchBox">
-                    <h1 class="heading">All Books</h1>
+                    <h1 class="heading">Educationl & Academic</h1>
                     <form class="search-form" onsubmit="event.preventDefault(); search();">
                         <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
                         <button class="submit" type="submit">
@@ -774,7 +774,7 @@
             </div>
             <div class="main" id="educational-academic">
                 <div class="heading-searchBox">
-                    <h1 class="heading">All Books</h1>
+                    <h1 class="heading">Additional Categories</h1>
                     <form class="search-form" onsubmit="event.preventDefault(); search();">
                         <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
                         <button class="submit" type="submit">
@@ -1027,20 +1027,28 @@
             });
 
             // Genre tab switching logic
+            // Genre tab switching logic
             document.querySelectorAll('#sidebar aside a').forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
 
+                    // Remove active state from all links
                     document.querySelectorAll('#sidebar aside a').forEach(l => l.classList.remove('activee'));
                     this.classList.add('activee');
 
+                    // Remove active state from all mains
+                    document.querySelectorAll('.main').forEach(main => main.classList.remove('activeee'));
+
+                    // Get the target genre and show it
                     const genre = this.getAttribute('data-genre');
+                    const targetMain = document.getElementById(genre);
+                    targetMain?.classList.add('activeee');
+
+                    // Save state
                     localStorage.setItem('activeLink', genre);
                     localStorage.setItem('activeMain', genre);
 
-                    document.querySelectorAll('.main').forEach(main => main.classList.remove('activeee'));
-                    document.getElementById(genre)?.classList.add('activeee');
-
+                    // Close sidebar
                     sidebar.classList.remove('showw');
                     lightOverlay.classList.remove('showwww');
                 });
@@ -1053,15 +1061,13 @@
                 const activeLink = localStorage.getItem('activeLink');
                 const activeMain = localStorage.getItem('activeMain');
 
-                document.querySelector('#sidebar aside a[data-genre="all-books"]')?.classList.remove('activee');
-                document.getElementById('all-books')?.classList.remove('activeee');
-
-                if (activeLink) {
+                if (activeLink && activeMain) {
                     document.querySelector(`#sidebar aside a[data-genre="${activeLink}"]`)?.classList.add('activee');
-                }
-
-                if (activeMain) {
                     document.getElementById(activeMain)?.classList.add('activeee');
+                } else {
+                    // Default: All Books active
+                    document.querySelector('#sidebar aside a[data-genre="all-books"]')?.classList.add('activee');
+                    document.getElementById('all-books')?.classList.add('activeee');
                 }
             } else {
                 resetToDefaultState();

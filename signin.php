@@ -102,6 +102,11 @@ if (isset($_SESSION['user_id'])) {
 
 
 <script>
+    localStorage.removeItem('activeLink');
+    localStorage.removeItem('activeMain');
+
+
+
     function togglePasswordVisibility(inputId, iconElement) {
         var inputField = document.getElementById(inputId);
 

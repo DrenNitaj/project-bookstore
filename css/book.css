@@ -1,0 +1,860 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: whitesmoke;
+    overflow-x: hidden;
+    font-family: 'Titillium Web', sans-serif;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+*{
+    font-family: 'Titillium Web', sans-serif;
+}
+
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    width: 100%;
+    height: auto;
+    padding: 5px 0;
+    position: fixed;
+    top: 0;
+    transition: top 0.3s;
+    z-index: 998;
+}
+
+/* header.hidden {
+    top: -98.188px;
+} */
+
+.logo{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo img{
+    width: 150px;
+    height: 75px;
+}
+
+.logo h1{
+    color: white;
+    padding: 0 5.64px;
+    text-align: center;
+    font-size: 30px;
+    min-width: 193.062px;
+}
+
+ul{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	overflow: hidden;
+	padding: 0px 10px;
+    margin-top: 10px;
+}
+
+ul li {
+	display: inline-block;
+	padding: 10px 16px;
+	margin: 5px 15px; 
+}
+
+ul li.active{
+	border-radius: 5px;
+}
+
+ul li:hover{
+	border-radius: 5px;
+}
+
+ul li a{
+	color: #a0a0a0;
+	text-decoration: none;
+	font-family: 'Titillium Web', sans-serif;
+	font-size: 18px;
+    position: relative;
+    letter-spacing: 0.5px;
+}
+
+ul li a::after{
+    content: "";
+    position: absolute;
+    background-color: white;
+    height: 3px;
+    width: 0;
+    left: 0;
+    bottom: -10px;
+    transition: 0.3s;
+}
+
+ul li a:hover{
+    color: white;
+}
+
+ul li a svg{
+    position: relative;
+    top: 5px;
+}
+
+ul li a:hover svg{
+    fill: white;
+}
+
+ul li a:hover:after{
+    width: 100%;
+}
+
+ul li.active a{
+    color: white;
+}
+
+ul li.active a svg{
+    fill: white;
+}
+
+ul li.active a::after{
+    width: 100%;
+}
+
+.menu-toggle {
+    display: none;
+    color: white;
+    margin-right: 20px;
+}
+
+
+
+
+
+
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure overlay is above other content */
+}
+
+.overlay.showww{
+    display: flex;
+}
+
+.dialog {
+    background: whitesmoke;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 60px;
+    text-align: center;
+    z-index: 1001; /* Ensure dialog is above the overlay if needed */
+    width: auto;
+}
+
+.buttons {
+    margin-top: 40px;
+    width: auto;
+}
+
+.buttons a {
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 0 40px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.no {
+    background: white;
+    color: black;
+    cursor: pointer;
+}
+
+.yes {
+    background: black;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+
+
+
+/* General Alert Styles */
+.alert {
+    width: 420px;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    z-index: 9999;
+    display: none;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    padding: 30px 20px 30px 60px;
+    background: #f8f9fa; /* Lighter background for a modern look */
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transform: translate(-50%, 0);
+    border-left: 5px solid #28a745; /* Green border to indicate success */
+}
+
+.alert div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; /* Align text to the left for better readability */
+}
+
+.alert img {
+    width: 60px; /* Slightly larger image for better visibility */
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover; /* Ensure image doesn't distort */
+}
+
+.alert h1:first-of-type {
+    font-size: 18px;
+    color: #333333; /* Darker text for better contrast */
+    margin: 0;
+}
+
+.alert h1:nth-of-type(2) {
+    font-size: 16px;
+    color: #555555; /* Lighter text for secondary information */
+    margin: 5px 0 0;
+}
+
+
+
+
+.book-details-reviews{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    padding-bottom: 40px;
+}
+
+.book{
+    width: auto;
+    margin: 96.188px auto 0;
+    padding: 40px 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    height: 100%;
+    gap: 40px;
+}
+
+.book-image {
+    min-width: 320px; /* Define a fixed width for consistency */
+    min-height: 520px; /* Define a fixed height for consistency */
+    max-width: 320px;
+    max-height: 520px;
+    padding: 60px 40px;
+    position: relative;
+    overflow: hidden; /* Ensure the image and overlay don't spill outside */
+    border: 1px solid rgb(0, 0, 0); /* Move the border from the image to the container */
+    border-radius: 8px;
+    padding: 0; /* Remove padding */
+}
+
+/* .book-image:hover{
+    border: 1px solid rgb(220, 136, 20);
+} */
+
+.book img {
+    width: calc(100% - 40px);
+    height: calc(100% - 80px);
+    border-radius: 8px; /* Matches the border-radius of the container */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.out-of-stock-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Darker background for more contrast */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8em; /* Increase font size slightly */
+    text-align: center;
+    z-index: 10; /* Ensure overlay stays on top */
+    border-radius: 8px; /* Matches the container */
+    font-family: 'Arial', sans-serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.out-of-stock-overlay h1 {
+    margin: 0;
+    padding: 10px 20px;
+    background-color: rgba(255, 0, 0, 0.8); /* Red background for the text area */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.book .title{
+    display: none;
+}
+
+.book .author{
+    display: none;
+}
+
+.book-details{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.book-details h1{
+    margin-top: 0;
+}
+
+.book-details h2:nth-of-type(1){
+    margin-top: -10px;
+}
+
+.price-stock{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.price-stock div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.price-stock div h2:nth-of-type(1){
+    margin: 0 0 -10px;
+}
+
+.book-actions{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.book-actions p{
+    padding: 10px 15px;
+    border: 1px solid rgb(220, 136, 20);
+    border-radius: 0px 15px;
+}
+
+.book-actions a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 30px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+    text-align: center;
+    min-width: 120px;
+    margin: 0 10px;
+}
+
+.book-actions svg {
+    margin-right: 5px;
+}
+
+.book-actions svg {
+    fill: rgb(220, 136, 20);
+}
+
+.add{
+    color: rgb(220, 136, 20);
+    background-color: inherit;
+    cursor: pointer;
+}
+
+.add:hover{
+    background-color: rgb(220, 136, 20);
+    color: white;
+}
+
+.add:hover svg{
+    fill: white;
+}
+
+.added{
+    /* display: none; */
+    background-color: rgb(220, 136, 20);
+    color: white;
+}
+
+.added svg{
+    fill: white;
+}
+
+.added:hover{
+    background-color: rgb(0, 0, 0);
+    color: white;
+}
+
+.added:hover svg{
+    fill: rgb(220, 136, 20);
+}
+
+
+
+
+
+
+
+
+form {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin: 40px auto;
+}
+
+form .input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #000;
+    border-right: none; /* remove right border to blend with button */
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+form .input:focus {
+    border-color: rgb(220, 136, 20);
+    box-shadow: 0 0 4px rgba(220, 136, 20, 0.5);
+}
+
+form .submit {
+    width: 60px;
+    height: 46.4px;
+    background-color: #000000;
+    border: 1px solid #000;
+    border-left: none; /* merge with input */
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form .submit:hover {
+    background-color: #d68814;
+}
+
+form .submit svg {
+    fill: #ffffff;
+    width: 24px;
+    height: 24px;
+}
+
+
+
+
+
+
+/* Container for all reviews */
+.reviews-container {
+    width: 80%;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Adds spacing between reviews */
+}
+
+.review {
+    position: relative; /* Ensures absolute elements inside are positioned relative to this block */
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.2s ease;
+    min-height: 100px; /* Adjust height to ensure enough space for the delete button */
+}
+
+/* .review:hover {
+    border-color: rgb(220, 136, 20);
+    box-shadow: 0 0 4px rgba(220, 136, 20, 0.5);
+} */
+
+/* Review header with user info and date */
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.review-user {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.review-date {
+    font-size: 14px;
+    color: #888;
+}
+
+/* Review comment text */
+.review-comment {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+    font-style: italic;
+}
+
+.delete-review {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer; /* Optional, makes it clear it's clickable */
+    background-color: #000000;
+    border: none;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-review:hover{
+    background-color: #d68814;
+}
+
+.delete-review svg{
+    fill: #ffffff; /* Changes icon color */
+    width: 24px;
+    height: 24px;
+}
+
+
+
+#no-comments {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: rgb(138, 138, 138);
+    text-align: center;
+    margin: 20px 40px 40px;
+    padding: 20px;
+    border: 2px dashed rgb(220, 136, 20);
+    border-radius: 10px;
+    background-color: white;
+    width: 100%;
+    max-width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform .2s ease-in-out, background-color .2s ease-in-out, box-shadow .2s ease-in-out;
+    cursor: default;
+}
+
+#no-comments:hover {
+    background-color: rgb(250, 250, 250);
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Hamburger menu styles for smaller screens */
+@media only screen and (max-width: 1284px) {
+    header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 35%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        right: -50%;
+        background-color: black;
+        box-shadow: 0 0 10px rgb(8, 8, 8);
+        z-index: -1;
+        transition: right .6s ease-in;
+    }
+
+    ul.show {
+        right: 0;
+        z-index: 999;
+        transition: right .6s ease-out;
+    }
+
+    ul li {
+        display: block;
+        text-align: center;
+        padding: 10px 0px;
+        margin: 5px 0;
+        width: 100%;
+    }
+
+    .menu-toggle {
+        display: block;
+        order: 1;
+        cursor: pointer;
+        font-family: 'Material Icons';
+        font-size: 24px;
+        color: white;
+        position: absolute;
+        right: 40px;
+        z-index: 1000;
+    }
+}
+
+@media only screen and (min-width: 1064px) and (max-width: 1176px) {
+    .book-actions a {
+        min-height: 43.2px;
+    }
+}
+
+@media only screen and (max-width: 1064px){
+    .book{
+        width: auto;
+        margin: 96.188px auto 0;
+        padding: 40px 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 60px;
+        height: 100%;
+    }
+
+    .book .title{
+        text-align: center;
+        display: flex;
+        margin: -10px auto -17.5px;
+    }
+
+    .book .author{
+        text-align: center;
+        display: flex;
+        margin: -17.5px auto -15px;
+    }
+
+    .book-details{
+        width: 100%;
+    }
+
+    .book-details h1{
+        display: none;
+    }
+    
+    .book-details h2:nth-of-type(1) {
+        display: none;
+    }
+
+    .book-details p{
+        text-align: center;
+    }
+
+    .book-details .price-stock .price-div h2:nth-of-type(1){
+        display: flex;
+    }
+
+    .book-details .price-stock .stock-div h2:nth-of-type(1){
+        display: flex;
+    }
+
+    /* .book-actions p{
+        text-align: center;
+        margin: 0 auto;
+    } */
+}
+
+@media only screen and (max-width: 946px){
+    #no-comments{
+        max-width: 200px;
+        margin: 50px auto;
+        font-size: 26px;
+    }
+}
+
+@media only screen and (max-width: 800px){
+    .book-image{
+        scale: 0.8;
+        margin: -50px auto -70px;
+    }
+
+    .book-actions{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px 0;
+    }
+    
+    .book-actions a{
+        min-width: 100px;
+        max-width: 100px;
+        min-height: 64.8px;
+        padding: 0px 20px;
+    }
+
+    .book-details .price-stock {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0 80px;
+    }
+
+    .book-details .price-stock div{
+        width: 50%;
+        text-align: center;
+    }
+
+
+
+    /* General Alert Styles */
+    .alert {
+        width: 280px;
+        padding: 20px 30px 20px 30px;
+    }
+
+    .alert h1:first-of-type {
+        font-size: 16px;
+    }
+
+    .alert h1:nth-of-type(2) {
+        font-size: 14px;
+    }
+
+
+    .dialog {
+        padding: 40px 20px;
+    }
+}
+
+
+@media only screen and (max-width: 630px){
+    .logo img{
+        width: 100px;
+        height: 50px;
+    }
+    .logo h1{
+        font-size: 24px;
+    }
+}

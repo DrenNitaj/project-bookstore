@@ -1,0 +1,599 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: whitesmoke;
+    overflow-x: hidden;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+*{
+    font-family: 'Titillium Web', sans-serif;
+}
+
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    width: 100%;
+    height: auto;
+    padding: 5px 0;
+    position: fixed;
+    top: 0;
+    transition: top 0.3s;
+    z-index: 998;
+}
+
+/* header.hidden {
+    top: -98.188px;
+} */
+
+.logo{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo img{
+    width: 150px;
+    height: 75px;
+}
+
+.logo h1{
+    color: white;
+    padding: 0 5.64px;
+    text-align: center;
+    font-size: 30px;
+    min-width: 193.062px;
+}
+
+ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    overflow: hidden;
+    padding: 0px 10px;
+    margin-top: 10px;
+}
+
+ul li {
+    display: inline-block;
+    padding: 10px 16px;
+    margin: 5px 15px; 
+}
+
+ul li.active{
+    border-radius: 5px;
+}
+
+ul li:hover{
+    border-radius: 5px;
+}
+
+ul li a{
+    color: #a0a0a0;
+    text-decoration: none;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 18px;
+    position: relative;
+    letter-spacing: 0.5px;
+}
+
+ul li a::after{
+    content: "";
+    position: absolute;
+    background-color: white;
+    height: 3px;
+    width: 0;
+    left: 0;
+    bottom: -10px;
+    transition: 0.3s;
+}
+
+ul li a:hover{
+    color: white;
+}
+
+ul li a svg{
+    position: relative;
+    top: 5px;
+}
+
+ul li a:hover svg{
+    fill: white;
+}
+
+ul li a:hover:after{
+    width: 100%;
+}
+
+ul li.active a{
+    color: white;
+}
+
+ul li.active a svg{
+    fill: white;
+}
+
+ul li.active a::after{
+    width: 100%;
+}
+
+.menu-toggle {
+    display: none;
+    color: white;
+    margin-right: 20px;
+}
+
+
+
+
+
+
+
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: auto;
+    margin: 96.188px 40px 20px 40px;
+}
+
+.heading{
+    padding-top: 20px;
+}
+
+.slider-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+.books {
+    position: relative;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-x: hidden; /* Hide overflow */
+    scroll-behavior: smooth; /* Smooth scrolling */
+    padding: 10px 0;
+}
+
+.book-card {
+    margin: 20px;
+    min-width: 220.275px;
+    max-width: 220.275px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    background-color: white;
+    transform: translateY(0);
+    transition: transform .2s ease-in-out;
+}
+
+.book-card:hover {
+    transform: translateY(-10px);
+}
+
+.book-card img {
+    width: 200px;
+    min-height: 300px;
+    max-height: 300px;
+    border-radius: 10px;
+}
+
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: white;
+    border: none;
+    padding: 15px;
+    font-size: 24px;
+    z-index: 1;
+    border-radius: 10px;
+}
+
+.left-btn {
+    left: 20px;
+}
+
+.right-btn {
+    right: 20px;
+}
+
+.slider-btn:hover {
+    background-color: rgb(220, 136, 20);
+    cursor: pointer;
+}
+
+.disabled:hover {
+    background-color: white;
+    cursor: auto;
+}
+
+
+.book-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+.title-author-price{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title-author {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 15px 0;
+}
+
+.title-author h1 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin: 0;
+    padding-left: 0;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.title-author h2 {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0;
+    padding-left: 0;
+    color: rgb(138, 138, 138);
+}
+
+.price{
+    font-size: 1.2rem;
+    color: rgb(220, 136, 20);
+}
+
+.cart-wishlist {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 15px;
+    gap: 10px;
+    margin: 0 30px 15px 30px;
+}
+
+.cart-wishlist a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+    min-width: 200.275px;
+    color: rgb(220, 136, 20);
+}
+
+/* .cart-wishlist a:nth-of-type(1){
+    margin-right: 20px;
+}
+
+.cart-wishlist a:nth-of-type(2){
+    margin-left: 20px;
+} */
+
+.cart-wishlist a:hover {
+    background-color: rgb(0, 0, 0);
+    color: white;
+}
+
+.cart-wishlist svg {
+    margin-right: 5px;
+}
+
+.purchase-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    text-decoration: none;
+    color: rgb(220, 136, 20);
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+}
+
+.purchase-button:hover {
+    background-color: rgb(220, 136, 20);
+    color: white;
+}
+
+.purchase-button svg {
+    margin-right: 5px;
+}
+
+.book-card svg {
+    fill: rgb(220, 136, 20);
+}
+
+.book-card a:hover svg {
+    fill: rgb(220, 136, 20);
+}
+
+
+
+
+#no-cart-items {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: rgb(138, 138, 138);
+    text-align: center;
+    margin: 50px auto;
+    padding: 60px 20px;
+    border: 2px dashed rgb(220, 136, 20);
+    border-radius: 10px;
+    background-color: white;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform .2s ease-in-out, background-color .2s ease-in-out, box-shadow .2s ease-in-out;
+}
+
+#no-cart-items:hover {
+    background-color: rgb(250, 250, 250);
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+#no-wishlist-items {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: rgb(138, 138, 138);
+    text-align: center;
+    margin: 50px auto;
+    padding: 60px 20px;
+    border: 2px dashed rgb(220, 136, 20);
+    border-radius: 10px;
+    background-color: white;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform .2s ease-in-out, background-color .2s ease-in-out, box-shadow .2s ease-in-out;
+    cursor: default;
+}
+
+#no-wishlist-items:hover {
+    background-color: rgb(250, 250, 250);
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+
+/* General Alert Styles */
+.alert {
+    width: 420px;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    z-index: 9999;
+    display: none;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    padding: 30px 20px 30px 60px;
+    background: #f8f9fa; /* Lighter background for a modern look */
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transform: translate(-50%, 0);
+    border-left: 5px solid #28a745; /* Green border to indicate success */
+}
+
+.alert div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; /* Align text to the left for better readability */
+}
+
+.alert img {
+    width: 60px; /* Slightly larger image for better visibility */
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover; /* Ensure image doesn't distort */
+}
+
+.alert h1:first-of-type {
+    font-size: 18px;
+    color: #333333; /* Darker text for better contrast */
+    margin: 0;
+}
+
+.alert h1:nth-of-type(2), .alert h1:nth-of-type(3) {
+    font-size: 16px;
+    color: #555555; /* Lighter text for secondary information */
+    margin: 5px 0 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Hamburger menu styles for smaller screens */
+@media only screen and (max-width: 1284px) {
+    header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 35%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        right: -50%;
+        background-color: black;
+        box-shadow: 0 0 10px rgb(8, 8, 8);
+        z-index: -1;
+        transition: right .6s ease-in;
+    }
+
+    ul.show {
+        right: 0;
+        z-index: 999;
+        transition: right .6s ease-out;
+    }
+
+    ul li {
+        display: block;
+        text-align: center;
+        padding: 10px 0px;
+        margin: 5px 0;
+        width: 100%;
+    }
+
+    .menu-toggle {
+        display: block;
+        order: 1;
+        cursor: pointer;
+        font-family: 'Material Icons';
+        font-size: 24px;
+        color: white;
+        position: absolute;
+        right: 40px;
+        z-index: 1000;
+    }
+}
+
+@media only screen and (max-width: 1292px){
+    main h1{
+        font-size: 28px;
+    }
+}
+
+@media only screen and (max-width: 1138px){
+    main h1{
+        font-size: 27px;
+    }
+}
+
+@media only screen and (max-width: 1060px){
+    main h1{
+        font-size: 26px;
+    }
+}
+
+@media only screen and (max-width: 968px){
+    main h1{
+        font-size: 25px;
+    }
+}
+
+@media only screen and (max-width: 958px){
+    main{
+        margin: 78.95px 40px 0;
+        justify-content: center;
+    }
+    main h1{
+        text-align: center;
+        margin: 20px auto;
+    }
+    .logo img{
+        width: 100px;
+        height: 50px;
+    }
+    .logo h1{
+        font-size: 24px;
+    }
+}
+
+@media only screen and (max-width: 800px){
+    /* General Alert Styles */
+    .alert {
+        width: 280px;
+        padding: 20px 30px 20px 30px;
+    }
+
+    .alert h1:first-of-type {
+        font-size: 16px;
+    }
+
+    .alert h1:nth-of-type(2) {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width: 600px){
+    main{
+        margin: 78.95px 20px 0;
+    }
+}

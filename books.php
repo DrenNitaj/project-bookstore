@@ -160,8 +160,13 @@
             </div>
             <div class="main" id="new-books">
                 <div class="heading-searchBox">
-                    <h1 class="heading">New Books</h1>
-                    <input type="text" class="searchBox" placeholder="Search for Books..." onkeyup="search()">
+                    <h1 class="heading">All Books</h1>
+                    <form class="search-form" onsubmit="event.preventDefault(); search();">
+                        <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
+                        <button class="submit" type="submit">
+                            <span class="material-symbols-outlined">search</span>
+                        </button>
+                    </form>
                 </div>
                 <div class="books">
                     <?php foreach ($newBooks as $newBook){ ?>
@@ -187,16 +192,26 @@
             </div>
             <div class="main" id="best-sellers">
                 <div class="heading-searchBox">
-                    <h1 class="heading">Best Sellers</h1>
-                    <input type="text" class="searchBox" placeholder="Search for Books..." onkeyup="search()">
+                    <h1 class="heading">All Books</h1>
+                    <form class="search-form" onsubmit="event.preventDefault(); search();">
+                        <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
+                        <button class="submit" type="submit">
+                            <span class="material-symbols-outlined">search</span>
+                        </button>
+                    </form>
                 </div>
                 <div class="books">
                 </div>
             </div>
             <div class="main" id="fiction">
                 <div class="heading-searchBox">
-                    <h1 class="heading">Fiction</h1>
-                    <input type="text" class="searchBox" placeholder="Search for Books..." onkeyup="search()">
+                    <h1 class="heading">All Books</h1>
+                    <form class="search-form" onsubmit="event.preventDefault(); search();">
+                        <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
+                        <button class="submit" type="submit">
+                            <span class="material-symbols-outlined">search</span>
+                        </button>
+                    </form>
                 </div>
                 <div class="books">
                     <?php foreach ($categoryResults['fiction'] as $fictionBook){ ?>
@@ -222,8 +237,13 @@
             </div>
             <div class="main" id="non-fiction">
                 <div class="heading-searchBox">
-                    <h1 class="heading">Non-Fiction</h1>
-                    <input type="text" class="searchBox" placeholder="Search for Books..." onkeyup="search()">
+                    <h1 class="heading">All Books</h1>
+                    <form class="search-form" onsubmit="event.preventDefault(); search();">
+                        <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
+                        <button class="submit" type="submit">
+                            <span class="material-symbols-outlined">search</span>
+                        </button>
+                    </form>
                 </div>
                 <div class="books">
                     <?php foreach ($categoryResults['nonFiction'] as $nonFictionBook){ ?>
@@ -249,8 +269,13 @@
             </div>
             <div class="main" id="young-adult">
                 <div class="heading-searchBox">
-                    <h1 class="heading">Young Adult</h1>
-                    <input type="text" class="searchBox" placeholder="Search for Books..." onkeyup="search()">
+                    <h1 class="heading">All Books</h1>
+                    <form class="search-form" onsubmit="event.preventDefault(); search();">
+                        <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
+                        <button class="submit" type="submit">
+                            <span class="material-symbols-outlined">search</span>
+                        </button>
+                    </form>
                 </div>
                 <div class="books">
                     <?php foreach ($categoryResults['youngAdult'] as $youngAdultBook){ ?>
@@ -276,8 +301,13 @@
             </div>
             <div class="main" id="children">
                 <div class="heading-searchBox">
-                    <h1 class="heading">Children's</h1>
-                    <input type="text" class="searchBox" placeholder="Search for Books..." onkeyup="search()">
+                    <h1 class="heading">All Books</h1>
+                    <form class="search-form" onsubmit="event.preventDefault(); search();">
+                        <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
+                        <button class="submit" type="submit">
+                            <span class="material-symbols-outlined">search</span>
+                        </button>
+                    </form>
                 </div>
                 <div class="books">
                     <?php foreach ($categoryResults['childrens'] as $childrensbook){ ?>
@@ -303,8 +333,13 @@
             </div>
             <div class="main" id="graphic-novels-comics">
                 <div class="heading-searchBox">
-                    <h1 class="heading">Graphic Novels & Comics</h1>
-                    <input type="text" class="searchBox" placeholder="Search for Books..." onkeyup="search()">
+                    <h1 class="heading">All Books</h1>
+                    <form class="search-form" onsubmit="event.preventDefault(); search();">
+                        <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
+                        <button class="submit" type="submit">
+                            <span class="material-symbols-outlined">search</span>
+                        </button>
+                    </form>
                 </div>
                 <div class="books">
                     <?php foreach ($categoryResults['graphicNovelsAndComics'] as $graphicNovelsAndComicsBook){ ?>
@@ -330,8 +365,13 @@
             </div>
             <div class="main" id="poetry">
                 <div class="heading-searchBox">
-                    <h1 class="heading">Poetry</h1>
-                    <input type="text" class="searchBox" placeholder="Search for Books..." onkeyup="search()">
+                    <h1 class="heading">All Books</h1>
+                    <form class="search-form" onsubmit="event.preventDefault(); search();">
+                        <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
+                        <button class="submit" type="submit">
+                            <span class="material-symbols-outlined">search</span>
+                        </button>
+                    </form>
                 </div>
                 <div class="books">
                     <?php foreach ($categoryResults['poetry'] as $poetryBook){ ?>
@@ -357,8 +397,13 @@
             </div>
             <div class="main" id="drama-plays">
                 <div class="heading-searchBox">
-                    <h1 class="heading">Drama & Plays</h1>
-                    <input type="text" class="searchBox" placeholder="Search for Books..." onkeyup="search()">
+                    <h1 class="heading">All Books</h1>
+                    <form class="search-form" onsubmit="event.preventDefault(); search();">
+                        <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
+                        <button class="submit" type="submit">
+                            <span class="material-symbols-outlined">search</span>
+                        </button>
+                    </form>
                 </div>
                 <div class="books">
                     <?php foreach ($categoryResults['dramaAndPlays'] as $dramaAndPlaysBook){ ?>
@@ -384,8 +429,13 @@
             </div>
             <div class="main" id="religious-spiritual">
                 <div class="heading-searchBox">
-                    <h1 class="heading">Religious & Spiritual</h1>
-                    <input type="text" class="searchBox" placeholder="Search for Books..." onkeyup="search()">
+                    <h1 class="heading">All Books</h1>
+                    <form class="search-form" onsubmit="event.preventDefault(); search();">
+                        <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
+                        <button class="submit" type="submit">
+                            <span class="material-symbols-outlined">search</span>
+                        </button>
+                    </form>
                 </div>
                 <div class="books">
                     <?php foreach ($categoryResults['religiousAndSpiritual'] as $religiousAndSpiritualBook){ ?>
@@ -411,8 +461,13 @@
             </div>
             <div class="main" id="educational-academic">
                 <div class="heading-searchBox">
-                    <h1 class="heading">Educational & Academic</h1>
-                    <input type="text" class="searchBox" placeholder="Search for Books..." onkeyup="search()">
+                    <h1 class="heading">All Books</h1>
+                    <form class="search-form" onsubmit="event.preventDefault(); search();">
+                        <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
+                        <button class="submit" type="submit">
+                            <span class="material-symbols-outlined">search</span>
+                        </button>
+                    </form>
                 </div>
                 <div class="books">
                     <?php foreach ($categoryResults['educationalAndAcademic'] as $educationalAndAcademicBook){ ?>
@@ -438,8 +493,13 @@
             </div>
             <div class="main" id="additional-categories">
                 <div class="heading-searchBox">
-                    <h1 class="heading">Additional Categories</h1>
-                    <input type="text" class="searchBox" placeholder="Search for Books..." onkeyup="search()">
+                    <h1 class="heading">All Books</h1>
+                    <form class="search-form" onsubmit="event.preventDefault(); search();">
+                        <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
+                        <button class="submit" type="submit">
+                            <span class="material-symbols-outlined">search</span>
+                        </button>
+                    </form>
                 </div>
                 <div class="books">
                     <?php foreach ($categoryResults['additionalCategories'] as $additionalCategoriesBook){ ?>

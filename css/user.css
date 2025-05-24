@@ -391,7 +391,9 @@ main {
     display: flex;
     width: 100%;
 }
-
+.alma{
+    
+}
 .books {
     width: 100%;
     display: grid;

@@ -49,10 +49,19 @@ if (isset($_SERVER['HTTP_REFERER'])) {
     $refererUrl = $_SERVER['HTTP_REFERER'];
     $parsedUrl = parse_url($refererUrl, PHP_URL_PATH);
 
-    if (basename($parsedUrl) == 'signinBook.php') {
-        $redirectUrl = "signinBook.php?action=review-deleted&book_id=" . $book_id;
-    } else if (basename($parsedUrl) == 'adminBookDetails.php') {
-        $redirectUrl = "adminBookDetails.php?action=review-deleted&book_id=" . $book_id;
+    switch (basename($parsedUrl)) {
+        case 'signinBook.php':
+            $redirectUrl = "signinBook.php?action=review-deleted&book_id=" . $book_id;
+            break;
+        case 'adminBookDetails.php':
+            $redirectUrl = "adminBookDetails.php?action=review-deleted&book_id=" . $book_id;
+            break;
+        case 'account.php':
+            $redirectUrl = "account.php?action=review-deleted&book_id=" . $book_id;
+            break;
+        default:
+            $redirectUrl = "account.php?action=review-deleted&book_id=" . $book_id; // fallback to account
+            break;
     }
 }
 

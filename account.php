@@ -40,6 +40,24 @@
     $purchaseCount = $result['purchase_count'];
 
     $hasNoPurchases = ($purchaseCount == 0);
+
+
+
+
+
+    // Fetch all reviews by the logged-in user
+    $sql = $conn->prepare("
+        SELECT reviews.review_id, reviews.book_id, reviews.comment, reviews.review_date, books.title 
+        FROM reviews 
+        JOIN books ON reviews.book_id = books.book_id 
+        WHERE reviews.user_id = :user_id
+    ");
+    $sql->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $sql->execute();
+
+    $userReviews = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+
         
     
     
@@ -77,6 +95,8 @@
         </header>
     
     
+
+        <h1 class="profile-title">Profile Info</h1>
     
         <div class="user-table-container">
             <table class="user-table">
@@ -139,21 +159,60 @@
                 </tfoot>
             </table>
             <div id="accountInfo">
+                <div id="accountInfoHeader"></div>
+
                 <div id="purchases">
                     <h1>Purchases</h1>
                     <?php if($hasNoPurchases){ ?>
                         <h2 id="no-purchases" class="heading">No Purchases</h2>
                     <?php } else { ?>
                         <div>
-
+                            <!-- Purchases content -->
                         </div> 
                     <?php } ?>       
                 </div>
+
                 <div id="lastLogin">
                     <h1>Last login</h1>
                     <h3><?php echo $user['last_login'];?></h3>    
                 </div>
             </div>
+        </div>
+
+
+
+
+
+        <div class="user-reviews-section">
+            <h1 class="profile-title">Your Comments</h1>
+
+            <?php if (empty($userReviews)) { ?>
+                <h1 id="no-comments">No comments yet!</h1>
+            <?php } else { ?>
+                <div class="reviews-container">
+                    <?php foreach ($userReviews as $review) { ?>
+                        <div class="review">
+                            <div class="review-header">
+                                <span class="review-user">Book: <?php echo htmlspecialchars($review['title']); ?></span>
+                                <span class="review-date"><?php echo htmlspecialchars($review['review_date']); ?></span>
+                            </div>
+                            <p class="review-comment">"<?php echo htmlspecialchars($review['comment']); ?>"</p>
+                            <a href="#" class="delete-review" data-review-id="<?php echo htmlspecialchars($review['review_id']); ?>" data-book-id="<?php echo htmlspecialchars($review['book_id']); ?>">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
+                                    <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    <?php } ?>
+                </div>
+            <?php } ?>
+        </div>
+
+
+
+
+        <div class="alert" id="delete-review-alert">                         
+            <h1>Your review has been successfully removed.</h1>
         </div>
 
 
@@ -163,6 +222,18 @@
 
         <div class="alert" id="new-password-alert">                         
             <h1>Password changed successfully.</h1>
+        </div>
+
+
+
+        <div class="overlay">
+            <div class="dialog">
+                <p>Are you sure?</p>
+                <div class="buttons">
+                    <a class="no">No</a>
+                    <a class="yes">Yes</a>
+                </div>
+            </div>
         </div>
     
     
@@ -219,6 +290,71 @@
                         const url = new URL(window.location);
                         url.searchParams.delete('action');
                         window.history.replaceState({}, document.title, url);
+                    }
+                });
+
+
+
+
+
+                document.addEventListener('DOMContentLoaded', function () {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const action = urlParams.get('action');
+                    const bookId = urlParams.get('book_id');
+
+                    if (action === 'review-deleted' && bookId) {
+                        showReviewAlert();
+                        setTimeout(hideReviewAlert, 3000);
+                        removeUrlParams();
+                    }
+
+                    function showReviewAlert() {
+                        const reviewAlert = document.getElementById('delete-review-alert');
+                        if (reviewAlert) reviewAlert.style.display = 'flex';
+                    }
+
+                    function hideReviewAlert() {
+                        const reviewAlert = document.getElementById('delete-review-alert');
+                        if (reviewAlert) reviewAlert.style.display = 'none';
+                    }
+
+                    function removeUrlParams() {
+                        const url = new URL(window.location);
+                        url.searchParams.delete('action');
+                        url.searchParams.delete('book_id');
+                        window.history.replaceState({}, document.title, url);
+                    }
+
+                    // Delete confirmation
+                    const overlay = document.querySelector('.overlay');
+                    const deleteReviewBtns = document.querySelectorAll('.delete-review');
+                    const noLink = document.querySelector('.no');
+                    const yesLink = document.querySelector('.yes');
+
+                    let currentReviewId = null;
+                    let currentBookId = null;
+
+                    deleteReviewBtns.forEach(link => {
+                        link.addEventListener('click', function (event) {
+                            event.preventDefault();
+                            currentReviewId = this.getAttribute('data-review-id');
+                            currentBookId = this.getAttribute('data-book-id');
+                            overlay.classList.add('showww');
+                        });
+                    });
+
+                    if (noLink) {
+                        noLink.addEventListener('click', function () {
+                            overlay.classList.remove('showww');
+                        });
+                    }
+
+                    if (yesLink) {
+                        yesLink.addEventListener('click', function () {
+                            if (currentReviewId) {
+                                window.location.href = `deleteReviews.php?review_id=${currentReviewId}&book_id=${currentBookId}`;
+                            }
+                        });
                     }
                 });
 

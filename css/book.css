@@ -519,10 +519,10 @@ form .submit svg {
     min-height: 100px; /* Adjust height to ensure enough space for the delete button */
 }
 
-/* .review:hover {
+.review:hover {
     border-color: rgb(220, 136, 20);
     box-shadow: 0 0 4px rgba(220, 136, 20, 0.5);
-} */
+}
 
 /* Review header with user info and date */
 .review-header {

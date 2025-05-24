@@ -143,7 +143,12 @@
     <div class="table" id="books">
         <div class="heading-searchBox">
             <h1 class="heading">Books</h1>
-            <input type="text" class="searchBox" placeholder="Search for Books..." onkeyup="search()">
+            <form class="search-form" onsubmit="event.preventDefault(); search();">
+                <input type="text" class="searchBox" placeholder="Search for Books..." onkeyup="search()">
+                <button class="submit" type="submit">
+                    <span class="material-symbols-outlined">search</span>
+                </button>
+            </form>
         </div>
         <table id="table">
             <thead>

@@ -315,6 +315,10 @@ ul li.active a::after{
     margin-left: 20px;
 }
 
+.submit:hover{
+    background-color: rgb(220, 136, 20);
+}
+
 
 
 
@@ -363,25 +367,60 @@ ul li.active a::after{
     padding-top: 20px;
 }
 
-.heading-searchBox input {
-    width: 500px;
-    height: 40px;
-    padding: 0 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.search-form {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-top: 20px;
+    min-width: 250px;
+}
+
+.search-form .searchBox {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #000;
+    border-right: none;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
     outline: none;
-    transition: border-color .2s, box-shadow .2s, width .2s ease-in-out;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.heading-searchBox input::placeholder {
-    color: #888;
-}
-
-.heading-searchBox input:focus {
+.search-form .searchBox:focus {
     border-color: rgb(220, 136, 20);
     box-shadow: 0 0 4px rgba(220, 136, 20, 0.5);
+}
+
+.search-form .submit {
+    width: 60px;
+    height: 46.4px;
+    background-color: #000000;
+    border: 1px solid #000;
+    border-left: none;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 0;
+    margin-top: 0;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.search-form .submit:hover {
+    background-color: #d68814;
+}
+
+.search-form .submit span {
+    fill: #ffffff;
+    color: #ffffff;
+    width: 24px;
+    height: 24px;
 }
 
 .heading-searchBox h1 {
@@ -572,6 +611,10 @@ ul li.active a::after{
     
     .heading-searchBox input {
         width: 60%;
+        margin-top: 20px;
+    }
+
+    .heading-searchBox .submit{
         margin-top: 20px;
     }
     

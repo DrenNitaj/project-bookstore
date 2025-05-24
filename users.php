@@ -81,7 +81,12 @@
     <div class="table" style="margin-top: 98.188px;">
         <div class="heading-searchBox">
             <h1 class="heading">Users</h1>
-            <input type="text" class="searchBox" placeholder="Search for Users..." onkeyup="search()">
+            <form class="search-form" onsubmit="event.preventDefault(); search();">
+                <input type="text" class="searchBox" placeholder="Search for Books..." onkeyup="search()">
+                <button class="submit" type="submit">
+                    <span class="material-symbols-outlined">search</span>
+                </button>
+            </form>
         </div>
         <table id="table">
             <thead>

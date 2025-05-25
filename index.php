@@ -134,7 +134,7 @@ $newBooks = $sqlPrep->fetchAll();
         <div id="about-us">
             <h1>About The BookHouse</h1>
             <p>At The BookHouse, our mission is to create a welcoming environment for book lovers. We believe in fostering a love of reading by providing a cozy space, a wide range of books, and engaging events for our community.</p>
-            <a href="#" class="learn-more-btn">Learn More About Us</a>
+            <a href="#" class="learn-more-btn" id="scrollToTop">Learn More About Us</a>
         </div>
     </section>
 

@@ -262,3 +262,15 @@ document.querySelectorAll('.books-wrapper .book').forEach(function(newBook) {
         window.location.href = `book.php?book_id=${bookId}`;
     });
 });
+
+
+
+
+
+
+
+
+document.getElementById('scrollToTop').addEventListener('click', function (e) {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});

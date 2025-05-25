@@ -2,12 +2,12 @@
 session_start();
 include_once("config.php");
 
-// Mood request limit: max 5 per day per session
+// Mood request limit: max 3 per day per session
 if (!isset($_SESSION['mood_requests_date']) || $_SESSION['mood_requests_date'] !== date('Y-m-d')) {
     $_SESSION['mood_requests_date'] = date('Y-m-d');
     $_SESSION['mood_requests'] = 0;
 }
-if ($_SESSION['mood_requests'] >= 5) {
+if ($_SESSION['mood_requests'] >= 3) {
     echo json_encode(["error" => "Daily AI limit reached. Try again tomorrow."]);
     exit;
 }

@@ -597,16 +597,17 @@ if (isset($_GET['book_id'])) {
                             // Show current answer permanently
                             document.getElementById('chatResponse').innerHTML = `<strong>AI:</strong> ${data.answer}`;
 
-                            // Render full history (including new Q&A)
+                            // Only render if we got a valid answer
                             renderHistory(data.history);
 
                             // Clear the input for next question (optional)
                             document.getElementById('userQuestion').value = '';
                         } else if (data.error) {
                             document.getElementById('chatResponse').innerHTML = `<span style="color:red;">Error: ${data.error}</span>`;
-                            if (data.response) {
-                                console.log('Full AI response:', data.response);
-                            }
+
+                            // DO NOT render old history again on fallback or error
+                            // Optionally clear input
+                            // document.getElementById('userQuestion').value = '';
                         } else {
                             document.getElementById('chatResponse').innerHTML = 'Error: Something went wrong.';
                         }

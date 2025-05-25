@@ -15,8 +15,8 @@ if (!isset($_SESSION['questions_today']) || !isset($_SESSION['questions_date']) 
 }
 
 // Check daily question limit
-if ($_SESSION['questions_today'] >= 5) {
-    echo json_encode(["error" => "You have reached your daily question limit (5 questions). Please try again tomorrow."]);
+if ($_SESSION['questions_today'] >= 3) {
+    echo json_encode(["error" => "You have reached your daily question limit (3 questions). Please try again tomorrow."]);
     exit;
 }
 
@@ -45,7 +45,7 @@ if (!$book) {
 // Cohere API Key
 $apiKey = COHERE_API_KEY; // Replace this with your actual key
 
-$prompt = "The user asks a question about the book titled '{$book['title']}' by {$book['author_name']}. Provide a clear, concise, and complete answer in no more than 3 sentences. Question: {$question}";
+$prompt = "The user asks a question about the book titled '{$book['title']}' by {$book['author_name']}'. Only respond if the question is directly related to this book's content, author, characters, or themes. If it's unrelated, respond with: 'Sorry, I can only answer questions about the specific book mentioned.' Otherwise, provide exactly 3 short and complete sentences. Make sure the full response fits comfortably within 200 tokens. Question: {$question}";
 
 $ch = curl_init('https://api.cohere.ai/v1/generate');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -58,7 +58,7 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, [
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
     'model' => 'command',
     'prompt' => $prompt,
-    'max_tokens' => 150,
+    'max_tokens' => 200,
     'temperature' => 0.7
 ]));
 
@@ -86,7 +86,14 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 if (isset($data['generations'][0]['text'])) {
     $answer = trim($data['generations'][0]['text']);
 
-    // Increment question count
+    // Check if AI response is the fallback (off-topic)
+    $fallback_response = "Sorry, I can only answer questions about the specific book mentioned.";
+    if (stripos($answer, $fallback_response) !== false) {
+        echo json_encode(["error" => $fallback_response]);
+        exit;
+    }
+
+    // Valid answer: increment question count
     $_SESSION['questions_today']++;
 
     // Initialize chat history array for the current book if not set
@@ -115,4 +122,5 @@ if (isset($data['generations'][0]['text'])) {
         'response' => $data
     ]);
 }
+
 

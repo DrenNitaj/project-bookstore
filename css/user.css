@@ -1426,6 +1426,12 @@ form .user-table tbody tr:hover {
     outline: none;
 }
 
+.mood-btn.active-mood {
+    background-color: rgb(220, 136, 20);
+    color: #fff;
+    outline: none;
+}
+
 .mood-btn i {
     font-size: 1.2em;
 }
@@ -1717,6 +1723,11 @@ form .user-table tbody tr:hover {
     .mood-selection {
         padding: 40px;
         margin: 120.188px auto -60px;
+    }
+
+    #moodSentence{
+        margin-top: 30px;
+        margin-bottom: -20px;
     }
 }
 

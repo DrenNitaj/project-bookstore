@@ -217,6 +217,13 @@ if (empty($recommendations['author']) && empty($recommendations['category']) && 
 <div id="moodBooks" class="books"></div>
 
 
+<div id="moodLoading" style="display:none; text-align:center; margin-top:-40px;">
+    <i class="fas fa-cog fa-spin" style="font-size:32px; color:#666;"></i>
+    <p style="margin-top:10px; font-size:18px; color:#555;">Loading recommendations...</p>
+</div>
+
+
+
 
 <script src="js/moodRecommender.js"></script>
 <script src="js/main.js?v=1.2"></script>

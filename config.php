@@ -14,7 +14,12 @@
 
 
 
-	$cohereApiKey = getenv('COHERE_API_KEY'); // Load from environment (optional for now)
+	$cohereApiKey = getenv('COHERE_API_KEY'); // Load from environment variable
+	if (!$cohereApiKey) {
+		die("API key not set in environment variable COHERE_API_KEY");
+	}
+
+	define('COHERE_API_KEY', $cohereApiKey);
 
 
 

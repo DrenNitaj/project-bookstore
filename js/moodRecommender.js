@@ -32,7 +32,7 @@ document.querySelectorAll('.mood-btn').forEach(btn => {
             data.books.forEach(book => {
                 booksContainer.innerHTML += `
                     <div class="book-card">
-                        <a href="book.php?book_id=${book.book_id}" class="book-card-link">
+                        <a href="signinBook.php?book_id=${book.book_id}" class="book-card-link">
                             <img src="images/coverimages/${book.cover_image_url}" alt="${book.title}">
                         </a>
                         <div class="title-author-price">

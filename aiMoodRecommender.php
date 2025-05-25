@@ -22,9 +22,11 @@ if (!$mood) {
     exit;
 }
 
-// Fetch book data
-$stmt = $conn->query("SELECT book_id, title, author_name, category_id, price, cover_image_url FROM books LIMIT 50");
-$books = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// Get all books and randomly select 50
+$stmt = $conn->query("SELECT book_id, title, author_name, category_id, price, cover_image_url FROM books");
+$allBooks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+shuffle($allBooks);
+$books = array_slice($allBooks, 0, 50);
 
 // Map category IDs to names
 $categoryMap = [];
@@ -35,13 +37,31 @@ while ($cat = $catStmt->fetch(PDO::FETCH_ASSOC)) {
 foreach ($books as &$book) {
     $book['category_name'] = $categoryMap[$book['category_id']] ?? 'Unknown';
 }
+unset($book);
 
-// Build prompt for Cohere
+
+$moodFull = $mood;
+
+$hour = (int)date('H');
+$timeOfDay = $hour < 12 ? 'morning' : ($hour < 18 ? 'afternoon' : 'evening');
+
+// Random prompt style
+$promptIntros = [
+    "I'm currently feeling \"$moodFull\" this $timeOfDay. Which 4 books would suit this mood best?",
+    "Today, I'm feeling \"$moodFull\" in the $timeOfDay. Pick 4 books that reflect that.",
+    "Suggest 4 books that match this mood: \"$moodFull\" ($timeOfDay).",
+    "Mood: \"$moodFull\". Recommend 4 fitting books from this list for my $timeOfDay.",
+    "Given that I'm feeling \"$moodFull\", which 4 books fit best for the $timeOfDay?"
+];
+$promptIntro = $promptIntros[array_rand($promptIntros)];
+
+// Build book summaries
 $bookSummaries = array_map(function($b) {
     return "{$b['title']} by {$b['author_name']} (Category: {$b['category_name']})";
 }, $books);
 
-$prompt = "I am feeling \"$mood\". From the list below, which 4 books match my mood the best?\n\n";
+// Final prompt
+$prompt = "$promptIntro\n\n";
 $prompt .= implode("\n", $bookSummaries);
 $prompt .= "\n\nFirst, write one short sentence matching my mood (max 15 words), then list 4 book titles only on new lines with no explanation.";
 
@@ -58,7 +78,7 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
     'model' => 'command',
     'prompt' => $prompt,
     'max_tokens' => 150,
-    'temperature' => 0.7
+    'temperature' => 0.85 // Slightly increased for more variety
 ]));
 
 $response = curl_exec($ch);
@@ -77,7 +97,7 @@ $data = json_decode($response, true);
 $aiReply = trim($data['generations'][0]['text'] ?? '');
 $lines = array_filter(array_map('trim', explode("\n", $aiReply)));
 
-$moodSentence = array_shift($lines); // First line is the sentence
+$moodSentence = array_shift($lines);
 $selectedTitles = $lines;
 
 if (empty($selectedTitles)) {
@@ -116,7 +136,7 @@ if (count($selectedBooks) < 4) {
     }
 }
 
-// Final response with sentence and books
+// Final response
 echo json_encode([
     "sentence" => $moodSentence ?: "Here are some picks to match your mood!",
     "books" => array_slice($selectedBooks, 0, 4)

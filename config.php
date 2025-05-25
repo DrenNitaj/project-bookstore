@@ -14,4 +14,9 @@
 
 
 
+	define('COHERE_API_KEY', 'BWT719QkDoF9bZ9Dyoo1h5x35ygGUQX63kYxTs71');
+
+
+
+
 ?>

@@ -5,7 +5,7 @@ body{
     overflow-x: hidden;
     font-family: 'Titillium Web', sans-serif;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -599,6 +599,76 @@ form .submit svg {
     transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
+
+
+
+
+
+
+
+#chatbot {
+      margin-top: 30px;
+      padding: 20px;
+      border: 2px solid rgb(220, 136, 20);
+      border-radius: 12px;
+      font-family: 'Titillium Web', sans-serif;
+      background: rgba(220, 136, 20, 0.1);
+      width: 80%;
+      margin-bottom: 40px;
+  }
+  #chatbot textarea {
+      width: 95%;
+      height: 80px;
+      margin-bottom: 10px;
+      font-size: 16px;
+      border: 1.5px solid rgb(210, 164, 100);
+      border-radius: 6px;
+      padding: 10px;
+      resize: vertical;
+  }
+  #chatbot textarea:focus{
+    border: 2px solid rgb(220, 136, 20);
+  }
+  #chatbot button {
+      padding: 10px 20px;
+      background: rgb(220, 136, 20);
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+  }
+  #chatResponse {
+      margin-top: 15px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #222;
+      min-height: 40px;
+  }
+  #chatHistory {
+      margin-top: 20px;
+      max-height: 300px;
+      overflow-y: auto;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 15px;
+      line-height: 1.4;
+  }
+  #chatHistory .entry {
+      margin-bottom: 12px;
+  }
+  #chatHistory .question {
+      font-weight: 700;
+      color: #4a90e2;
+  }
+  #chatHistory .answer {
+      margin-left: 10px;
+      color: #555;
+  }
+
 
 
 

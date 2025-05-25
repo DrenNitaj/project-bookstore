@@ -29,7 +29,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" type="text/css" href="css/cart-wishlist.css?v=1.1">
-    <title>the BookHouse / Cart</title>
+    <title>the BookHouse / Purchases</title>
     <link rel="icon" href="images/logo.jpg">
 </head>
 <body>

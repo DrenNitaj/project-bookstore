@@ -55,10 +55,10 @@
         </header>
     
     
-    
+        <h1 class="profile-title">Edit Profile</h1>
     
         <form action="updateProfile.php" method="post">
-            <div class="user-table-container">
+            <div style="padding-bottom: 60px;" class="user-table-container">
                 <table class="user-table">
                     <thead>
                         <tr>

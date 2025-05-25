@@ -55,10 +55,10 @@
         </header>
     
     
-    
+        <h1 class="profile-title">Change Password</h1>
     
         <form action="changePasswordLogic.php" method="post">
-            <div class="user-table-container">
+            <div style="padding-bottom: 60px;" class="user-table-container">
                 <table class="user-table">
                     <thead>
                         <tr>

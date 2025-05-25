@@ -242,7 +242,8 @@
                 <a href="#" data-genre="drama-plays">Drama & Plays</a>
                 <a href="#" data-genre="religious-spiritual">Religious & Spiritual</a>
                 <a href="#" data-genre="educational-academic">Educational & Academic</a>
-                <a href="#" data-genre="additional-categories">Additional Categories</a>
+                <a style="display: none;" href="#" data-genre="additional-categories">Additional Categories</a>
+                <a href="recommendations.php" class="external-link">Recomandations</a>
             </aside>
         </div>
         
@@ -424,7 +425,7 @@
             </div>
             <div class="main" id="non-fiction">
                 <div class="heading-searchBox">
-                    <h1 class="heading">Young Adult</h1>
+                    <h1 class="heading">Non-Fiction</h1>
                     <form class="search-form" onsubmit="event.preventDefault(); search();">
                         <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
                         <button class="submit" type="submit">
@@ -474,7 +475,7 @@
             </div>
             <div class="main" id="young-adult">
                 <div class="heading-searchBox">
-                    <h1 class="heading">Children's</h1>
+                    <h1 class="heading">Young Adult</h1>
                     <form class="search-form" onsubmit="event.preventDefault(); search();">
                         <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
                         <button class="submit" type="submit">
@@ -524,7 +525,7 @@
             </div>
             <div class="main" id="children">
                 <div class="heading-searchBox">
-                    <h1 class="heading">Graphic Novels & Comics</h1>
+                    <h1 class="heading">Children's</h1>
                     <form class="search-form" onsubmit="event.preventDefault(); search();">
                         <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
                         <button class="submit" type="submit">
@@ -574,7 +575,7 @@
             </div>
             <div class="main" id="graphic-novels-comics">
                 <div class="heading-searchBox">
-                    <h1 class="heading">Poetry</h1>
+                    <h1 class="heading">Graphic Novels & Comics</h1>
                     <form class="search-form" onsubmit="event.preventDefault(); search();">
                         <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
                         <button class="submit" type="submit">
@@ -624,7 +625,7 @@
             </div>
             <div class="main" id="poetry">
                 <div class="heading-searchBox">
-                    <h1 class="heading">Drama & Plays</h1>
+                    <h1 class="heading">Poetry</h1>
                     <form class="search-form" onsubmit="event.preventDefault(); search();">
                         <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
                         <button class="submit" type="submit">
@@ -674,7 +675,7 @@
             </div>
             <div class="main" id="drama-plays">
                 <div class="heading-searchBox">
-                    <h1 class="heading">Religious & Spiritual</h1>
+                    <h1 class="heading">Drama & Plays</h1>
                     <form class="search-form" onsubmit="event.preventDefault(); search();">
                         <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
                         <button class="submit" type="submit">
@@ -724,7 +725,7 @@
             </div>
             <div class="main" id="religious-spiritual">
                 <div class="heading-searchBox">
-                    <h1 class="heading">Educationl & Academic</h1>
+                    <h1 class="heading">Religious & Spiritual</h1>
                     <form class="search-form" onsubmit="event.preventDefault(); search();">
                         <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
                         <button class="submit" type="submit">
@@ -774,7 +775,7 @@
             </div>
             <div class="main" id="educational-academic">
                 <div class="heading-searchBox">
-                    <h1 class="heading">Additional Categories</h1>
+                    <h1 class="heading">Educational & Academic</h1>
                     <form class="search-form" onsubmit="event.preventDefault(); search();">
                         <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
                         <button class="submit" type="submit">
@@ -824,7 +825,7 @@
             </div>
             <div class="main" id="additional-categories">
                 <div class="heading-searchBox">
-                    <h1 class="heading">All Books</h1>
+                    <h1 class="heading">Additional Categories</h1>
                     <form class="search-form" onsubmit="event.preventDefault(); search();">
                         <input type="text" class="input" placeholder="Search for Books..." onkeyup="search()">
                         <button class="submit" type="submit">
@@ -1044,6 +1045,9 @@
             // Genre tab switching logic
             document.querySelectorAll('#sidebar aside a').forEach(link => {
                 link.addEventListener('click', function(e) {
+                    // If it's an external link (like recommendations.php), skip custom logic
+                    if (this.classList.contains('external-link')) return;
+
                     e.preventDefault();
 
                     // Remove active state from all links

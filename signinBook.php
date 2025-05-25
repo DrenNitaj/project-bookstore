@@ -293,6 +293,16 @@ if (isset($_GET['book_id'])) {
         </div> 
 
 
+        <div id="chatbot">
+            <h3>Ask AI about this book</h3>
+            <textarea id="userQuestion" placeholder="Ask a question about this book..."></textarea>
+            <button onclick="askBookAI()">Ask</button>
+            <div id="chatResponse"></div>
+            <div id="chatHistory"></div> <!-- Add this if missing -->
+        </div>
+
+
+
             <div class="alert" id="review-alert">                         
                 <h1>Thank you! Your review was submitted successfully.</h1>
             </div>
@@ -356,6 +366,15 @@ if (isset($_GET['book_id'])) {
                 });
 
 
+
+
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const bookHistory = <?php 
+                    echo json_encode($_SESSION['chat_history'][$book_id] ?? []); 
+                    ?>;
+                    renderHistory(bookHistory);
+                });
 
 
 
@@ -550,6 +569,70 @@ if (isset($_GET['book_id'])) {
                         }
                     });
                 });
+
+
+
+
+
+
+                function askBookAI() {
+                    const question = document.getElementById('userQuestion').value.trim();
+                    const bookId = <?php echo json_encode($book_id); ?>;
+
+                    if (!question) {
+                        document.getElementById('chatResponse').innerText = "Please enter a question.";
+                        return;
+                    }
+
+                    document.getElementById('chatResponse').innerText = 'Thinking...';
+
+                    fetch('askAI.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: `question=${encodeURIComponent(question)}&book_id=${bookId}`
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.answer) {
+                            // Show current answer permanently
+                            document.getElementById('chatResponse').innerHTML = `<strong>AI:</strong> ${data.answer}`;
+
+                            // Render full history (including new Q&A)
+                            renderHistory(data.history);
+
+                            // Clear the input for next question (optional)
+                            document.getElementById('userQuestion').value = '';
+                        } else if (data.error) {
+                            document.getElementById('chatResponse').innerHTML = `<span style="color:red;">Error: ${data.error}</span>`;
+                            if (data.response) {
+                                console.log('Full AI response:', data.response);
+                            }
+                        } else {
+                            document.getElementById('chatResponse').innerHTML = 'Error: Something went wrong.';
+                        }
+                    });
+                }
+
+                function renderHistory(history) {
+                    if (!history || history.length === 0) {
+                        document.getElementById('chatHistory').innerHTML = '';
+                        return;
+                    }
+
+                    const html = history.map(entry => `
+                        <div class="entry">
+                            <div class="question">Q: ${entry.question} <small style="color:#999;">(${entry.time})</small></div>
+                            <div class="answer">A: ${entry.answer}</div>
+                        </div>
+                    `).join('');
+
+                    document.getElementById('chatHistory').innerHTML = html;
+                }
+
+
+
+
+
 
 
 

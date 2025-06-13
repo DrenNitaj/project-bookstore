@@ -1,7 +1,6 @@
 <?php
 include('sessionCheck.php');
 include_once("config.php");
-include_once("removeExpiredItems.php");
 
 if (empty($_SESSION['user_id'])) {
     header("Location: signin.php");
@@ -10,7 +9,7 @@ if (empty($_SESSION['user_id'])) {
 
 $userId = $_SESSION['user_id'];
 
-// Step 1: Collect interacted book IDs
+// Fetch user's interacted book IDs
 $interactedBookIds = [];
 $queries = [
     "SELECT book_id FROM wishlist_items wi JOIN wishlists w ON wi.wishlist_id = w.wishlist_id WHERE w.user_id = ?",
@@ -26,119 +25,125 @@ foreach ($queries as $sql) {
     }
 }
 
-$interactedBookIds = array_unique($interactedBookIds);
+// Ensure unique, reindexed IDs for parameter binding
+$interactedBookIds = array_values(array_unique($interactedBookIds));
+
 $recommendedBookIds = [];
 
 $recommendations = [
-    'author' => [],
+    'author'   => [],
     'category' => [],
-    'price' => [],
+    'price'    => [],
     'fallback' => []
 ];
 
-if (!empty($interactedBookIds)) {
-    $placeholders = implode(',', array_fill(0, count($interactedBookIds), '?'));
-    $metaStmt = $conn->prepare("SELECT author_name, category_id, price FROM books WHERE book_id IN ($placeholders)");
-    $metaStmt->execute($interactedBookIds);
+$authors = [];
+$categories = [];
+$prices = [];
 
-    $authors = [];
-    $categories = [];
-    $prices = [];
+if (!empty($interactedBookIds)) {
+    // Gather metadata for interactions
+    $placeholders = implode(',', array_fill(0, count($interactedBookIds), '?'));
+    $metaSql = "SELECT author_name, category_id, price FROM books WHERE book_id IN ($placeholders)";
+    $metaStmt = $conn->prepare($metaSql);
+    $metaStmt->execute(array_values($interactedBookIds));
 
     while ($row = $metaStmt->fetch(PDO::FETCH_ASSOC)) {
-        $authors[] = $row['author_name'];
+        $authors[]    = $row['author_name'];
         $categories[] = $row['category_id'];
-        $prices[] = $row['price'];
+        $prices[]     = $row['price'];
     }
-
-    $authors = array_unique($authors);
-    $categories = array_unique($categories);
-    $prices = array_unique($prices);
+    // Ensure uniqueness and reindexing
+    $authors    = array_values(array_unique($authors));
+    $categories = array_values(array_unique($categories));
+    $prices     = array_values(array_unique($prices));
 
     // Author Recommendations
-    if ($authors) {
-        $placeholders = implode(',', array_fill(0, count($authors), '?'));
-        $sql = "SELECT b.*, c.name AS category_name 
-                FROM books b 
-                LEFT JOIN categories c ON b.category_id = c.category_id 
-                WHERE b.author_name IN ($placeholders)";
-        if ($interactedBookIds) {
-            $sql .= " AND b.book_id NOT IN (" . implode(',', array_fill(0, count($interactedBookIds), '?')) . ")";
+    if (!empty($authors)) {
+        $authorPlaceholders = implode(',', array_fill(0, count($authors), '?'));
+        $sql = "SELECT b.*, c.name AS category_name
+                FROM books b
+                LEFT JOIN categories c ON b.category_id = c.category_id
+                WHERE b.author_name IN ($authorPlaceholders)";
+        $params = $authors;
+        if (!empty($interactedBookIds)) {
+            $bookPlaceholders = implode(',', array_fill(0, count($interactedBookIds), '?'));
+            $sql .= " AND b.book_id NOT IN ($bookPlaceholders)";
+            $params = array_merge($params, $interactedBookIds);
         }
         $sql .= " LIMIT 6";
-
         $stmt = $conn->prepare($sql);
-        $stmt->execute(array_merge($authors, $interactedBookIds));
+        $stmt->execute(array_values($params));
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             if (!in_array($row['book_id'], $recommendedBookIds)) {
                 $recommendations['author'][] = $row;
-                $recommendedBookIds[] = $row['book_id'];
+                $recommendedBookIds[]       = $row['book_id'];
                 if (count($recommendations['author']) >= 3) break;
             }
         }
     }
 
     // Category Recommendations
-    if ($categories) {
-        $placeholders = implode(',', array_fill(0, count($categories), '?'));
-        $sql = "SELECT b.*, c.name AS category_name 
-                FROM books b 
-                LEFT JOIN categories c ON b.category_id = c.category_id 
-                WHERE b.category_id IN ($placeholders)";
-        if ($interactedBookIds) {
-            $sql .= " AND b.book_id NOT IN (" . implode(',', array_fill(0, count($interactedBookIds), '?')) . ")";
+    if (!empty($categories)) {
+        $categoryPlaceholders = implode(',', array_fill(0, count($categories), '?'));
+        $sql = "SELECT b.*, c.name AS category_name
+                FROM books b
+                LEFT JOIN categories c ON b.category_id = c.category_id
+                WHERE b.category_id IN ($categoryPlaceholders)";
+        $params = $categories;
+        if (!empty($interactedBookIds)) {
+            $bookPlaceholders = implode(',', array_fill(0, count($interactedBookIds), '?'));
+            $sql .= " AND b.book_id NOT IN ($bookPlaceholders)";
+            $params = array_merge($params, $interactedBookIds);
         }
         $sql .= " LIMIT 6";
-
         $stmt = $conn->prepare($sql);
-        $stmt->execute(array_merge($categories, $interactedBookIds));
+        $stmt->execute(array_values($params));
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             if (!in_array($row['book_id'], $recommendedBookIds)) {
                 $recommendations['category'][] = $row;
-                $recommendedBookIds[] = $row['book_id'];
+                $recommendedBookIds[]          = $row['book_id'];
                 if (count($recommendations['category']) >= 3) break;
             }
         }
     }
 
     // Price Recommendations (±10%)
-    if ($prices) {
+    if (!empty($prices)) {
         $min = min($prices) * 0.9;
         $max = max($prices) * 1.1;
-        $sql = "SELECT b.*, c.name AS category_name 
-                FROM books b 
-                LEFT JOIN categories c ON b.category_id = c.category_id 
+        $sql = "SELECT b.*, c.name AS category_name
+                FROM books b
+                LEFT JOIN categories c ON b.category_id = c.category_id
                 WHERE b.price BETWEEN ? AND ?";
-        if ($interactedBookIds) {
-            $sql .= " AND b.book_id NOT IN (" . implode(',', array_fill(0, count($interactedBookIds), '?')) . ")";
+        $params = [$min, $max];
+        if (!empty($interactedBookIds)) {
+            $bookPlaceholders = implode(',', array_fill(0, count($interactedBookIds), '?'));
+            $sql .= " AND b.book_id NOT IN ($bookPlaceholders)";
+            $params = array_merge($params, $interactedBookIds);
         }
         $sql .= " ORDER BY RAND() LIMIT 6";
-
         $stmt = $conn->prepare($sql);
-        $stmt->execute(array_merge([$min, $max], $interactedBookIds));
+        $stmt->execute(array_values($params));
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             if (!in_array($row['book_id'], $recommendedBookIds)) {
                 $recommendations['price'][] = $row;
-                $recommendedBookIds[] = $row['book_id'];
+                $recommendedBookIds[]       = $row['book_id'];
                 if (count($recommendations['price']) >= 3) break;
             }
         }
     }
 }
 
-// Fallback: if no data from user
+// Fallback if no recommendations
 if (empty($recommendations['author']) && empty($recommendations['category']) && empty($recommendations['price'])) {
-    $stmt = $conn->query("
-        SELECT b.*, c.name AS category_name 
-        FROM books b 
-        LEFT JOIN categories c ON b.category_id = c.category_id 
-        ORDER BY RAND() LIMIT 3
-    ");
+    $stmt = $conn->query("SELECT b.*, c.name AS category_name FROM books b LEFT JOIN categories c ON b.category_id = c.category_id ORDER BY RAND() LIMIT 3");
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         $recommendations['fallback'][] = $row;
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

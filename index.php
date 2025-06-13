@@ -116,16 +116,42 @@ $newBooks = $sqlPrep->fetchAll();
         <p>Your one-stop destination for the best books, events, and community.</p>
         <div id="highlights">
             <div class="highlight-item">
-                <h2>Diverse Collection</h2>
-                <p>We offer a vast selection of books across all genres to suit every reader.</p>
+                <div class="card-inner">
+                    <div class="card-front">
+                        <h2>Diverse Collection</h2>
+                        <p>We offer a vast selection of books across all genres to suit every reader.</p>
+                    </div>
+                    <div class="card-back">
+                        <div class="bg-image" style="background-image: url('images/genres.jpg');"></div>
+                        <h2>Explore Our Genres</h2>
+                    </div>
+                </div>
             </div>
+
             <div class="highlight-item">
-                <h2>Community Events</h2>
-                <p>Join us for book readings, author signings, and discussion groups.</p>
+                <div class="card-inner">
+                    <div class="card-front">
+                        <h2>Community Events</h2>
+                        <p>Join us for book readings, author signings, and discussion groups.</p>
+                    </div>
+                    <div class="card-back">
+                        <div class="bg-image" style="background-image: url('images/events.jpg');"></div>
+                        <h2>Join Our Events</h2>
+                    </div>
+                </div>
             </div>
+
             <div class="highlight-item">
-                <h2>Personalized Recommendations</h2>
-                <p>Get tailored book suggestions from our experienced staff.</p>
+                <div class="card-inner">
+                    <div class="card-front">
+                        <h2>Personalized Recommendations</h2>
+                        <p>Get tailored book suggestions from our experienced staff.</p>
+                    </div>
+                    <div class="card-back">
+                        <div class="bg-image" style="background-image: url('images/recommendations.jpg');"></div>
+                        <h2>Get Custom Picks</h2>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -134,9 +160,32 @@ $newBooks = $sqlPrep->fetchAll();
         <div id="about-us">
             <h1>About The BookHouse</h1>
             <p>At The BookHouse, our mission is to create a welcoming environment for book lovers. We believe in fostering a love of reading by providing a cozy space, a wide range of books, and engaging events for our community.</p>
-            <a href="#" class="learn-more-btn" id="scrollToTop">Learn More About Us</a>
+            <a href="" class="learn-more-btn" id="learnMoreBtn">Learn More About Us</a>
         </div>
     </section>
+
+    <div class="overlay" id="aboutOverlay">
+        <div class="overlay-content">
+            <span class="close-btn" id="closeOverlay">&times;</span>
+            <h2>Our Story</h2>
+            <div class="overlay-image"></div>
+            <p>Founded in 2010, The BookHouse began as a small neighborhood bookstore with just 500 titles. Today, we're proud to house over 50,000 books across all genres, serving book lovers from all walks of life.</p>
+            
+            <h3>Our Philosophy</h3>
+            <p>We believe books have the power to transform lives. Our carefully curated collection is designed to inspire, educate, and entertain readers of all ages. Our knowledgeable staff are always ready to help you find your next great read.</p>
+            
+            <h3>The BookHouse Experience</h3>
+            <p>More than just a bookstore, we're a community hub. Our space features:</p>
+                <p class="list-p">• Comfortable reading nooks with armchairs and natural light</p>
+                <p class="list-p">• A children's corner with weekly storytime sessions</p>
+                <p class="list-p">• An in-house café serving artisanal coffee and pastries</p>
+                <p class="list-p">• Monthly author events and book club meetings</p>
+                <p class="list-p">• Writing workshops and literary discussions</p>
+            
+            <h3>Our Team</h3>
+            <p>Our staff consists of passionate bibliophiles with diverse reading interests. From Pulitzer Prize winners to the latest fantasy series, we've got you covered with personalized recommendations.</p>
+        </div>
+    </div>
 
     <section id="section4">
             <div class="section4-content">
@@ -213,12 +262,12 @@ $newBooks = $sqlPrep->fetchAll();
         <h1>Stay Connected</h1>
         <p>Follow us on social media for the latest updates, news, and events.</p>
         <div class="social-links">
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
-            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a>
+            <a href="https://x.com/"><i class="fa-brands fa-x-twitter"></i></i></a>
+            <a href="https://www.linkedin.com/"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.tiktok.com/"><i class="fab fa-tiktok"></i></a>
         </div>
     </section>
 
@@ -252,12 +301,12 @@ $newBooks = $sqlPrep->fetchAll();
             <div class="footer-social">
                 <h3>Follow Us</h3>
                 <ul class="footer-nav">
-                    <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                    <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                    <li><a href="#"><i class="fab fa-tiktok"></i></a></li>
+                    <li><a href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a></li>
+                    <li><a href="https://x.com/"><i class="fa-brands fa-x-twitter"></i></a></li>
+                    <li><a href="https://www.linkedin.com/"><i class="fab fa-linkedin-in"></i></a></li>
+                    <li><a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a></li>
+                    <li><a href="https://www.tiktok.com/"><i class="fab fa-tiktok"></i></a></li>
                 </ul>
             </div>
         </div>

@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const storedMood = localStorage.getItem(MOOD_STORAGE_KEY);
 
     if (storedBooks && storedBooks.length && storedSentence && storedMood) {
-        heading.textContent = "Did your mood change or something else?";
+        heading.textContent = "Did your mood change?";
 
         highlightMoodButton(storedMood);
 

@@ -595,7 +595,6 @@ form .submit svg {
 }
 
 #no-comments:hover {
-    background-color: rgb(250, 250, 250);
     transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
@@ -607,67 +606,71 @@ form .submit svg {
 
 
 #chatbot {
-      margin-top: 30px;
-      padding: 20px;
-      border: 2px solid rgb(220, 136, 20);
-      border-radius: 12px;
-      font-family: 'Titillium Web', sans-serif;
-      background: rgba(220, 136, 20, 0.1);
-      width: 80%;
-      margin-bottom: 40px;
-  }
-  #chatbot textarea {
-      width: 95%;
-      height: 80px;
-      margin-bottom: 10px;
-      font-size: 16px;
-      border: 1.5px solid rgb(210, 164, 100);
-      border-radius: 6px;
-      padding: 10px;
-      resize: vertical;
-  }
-  #chatbot textarea:focus{
+    margin: 30px 20px 40px 20px;
     border: 2px solid rgb(220, 136, 20);
-  }
-  #chatbot button {
-      padding: 10px 20px;
-      background: rgb(220, 136, 20);
-      color: white;
-      border: none;
-      cursor: pointer;
-      border-radius: 8px;
-      font-weight: 600;
-      transition: background-color 0.3s ease;
-  }
-  #chatResponse {
-      margin-top: 15px;
-      font-size: 18px;
-      font-weight: 600;
-      color: #222;
-      min-height: 40px;
-  }
-  #chatHistory {
-      margin-top: 20px;
-      max-height: 300px;
-      overflow-y: auto;
-      background: white;
-      border: 1px solid #ccc;
-      padding: 15px;
-      border-radius: 8px;
-      font-size: 15px;
-      line-height: 1.4;
-  }
-  #chatHistory .entry {
-      margin-bottom: 12px;
-  }
-  #chatHistory .question {
-      font-weight: 700;
-      color: #4a90e2;
-  }
-  #chatHistory .answer {
-      margin-left: 10px;
-      color: #555;
-  }
+    border-radius: 12px;
+    font-family: 'Titillium Web', sans-serif;
+    background: rgba(220, 136, 20, 0.1);
+    width: 80%;
+    max-width: 80%;
+    padding-bottom: 40px;
+}
+#chatbot *{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+#chatbot textarea {
+    width: calc(100% - 60px);
+    height: 80px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    border: 1.5px solid rgb(210, 164, 100);
+    border-radius: 6px;
+    padding: 10px;
+    resize: vertical;
+}
+#chatbot textarea:focus{
+    border: 2px solid rgb(220, 136, 20);
+}
+#chatbot button {
+    padding: 10px 20px;
+    background: rgb(220, 136, 20);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+#chatResponse {
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #222;
+    min-height: 40px;
+}
+#chatHistory {
+    margin-top: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 15px;
+    line-height: 1.4;
+}
+#chatHistory .entry {
+    margin-bottom: 12px;
+}
+#chatHistory .question {
+    font-weight: 700;
+    color: #4a90e2;
+}
+#chatHistory .answer {
+    margin-left: 10px;
+    color: #555;
+}
 
 
 
@@ -677,7 +680,139 @@ form .submit svg {
 
 
 
+.purchase-container {
+    max-width: 80vw; /* never wider than 80% of viewport */
+    width: 100%;      /* allow it to shrink for smaller screens */
+    margin: 140px auto 42.8px;
+    padding: 40px 60px;
+    border: 1px solid rgb(220, 136, 20);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    background-color: #fff;
+    font-family: 'Arial', sans-serif;
+    box-sizing: border-box;
+}
 
+.purchase-container h1 {
+    text-align: center;
+    margin-bottom: 0;
+    font-size: 2em;
+}
+
+.purchase-container .purchasediv{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.purchase-container .book-summary {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    align-items: center;
+    text-align: center;
+    width: 50%;
+}
+
+.purchase-container .book-summary img {
+    width: 180px;
+    height: 270px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #000;
+}
+
+.purchase-container .book-summary h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.purchase-container .book-summary h3 {
+    margin: 5px 0 15px;
+    font-weight: normal;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.purchase-container .book-summary p {
+    font-size: 1.1rem;
+}
+
+.purchase-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.purchase-container .input-div {
+    position: relative;
+    width: 100%; /* full width of form */
+    margin-bottom: 10px;
+}
+
+.purchase-container .input-div .input {
+    width: 100%; /* all form elements same width */
+    padding: 12px 15px;
+    font-size: 1rem;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    background: white;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.purchase-container .input-div textarea.input {
+    resize: vertical; /* optional: allow resize */
+}
+
+
+.purchase-container .input-div .input:not(:focus)::placeholder {
+    color: #aaa;
+}
+
+.purchase-container .input-div label {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    background: white;
+    padding: 0 5px;
+    color: #000000;
+    transition: all 0.2s ease;
+    pointer-events: none;
+    font-size: 0.95rem;
+}
+
+.purchase-container .input-div .input:focus + label,
+.purchase-container .input-div .input:not(:placeholder-shown) + label {
+    top: 0px;
+    left: 12px;
+    font-size: 12px;
+    color: rgb(220, 136, 20);
+    z-index: 2;
+}
+
+
+.purchase-container form button {
+    padding: 12px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.purchase-container form button:hover {
+    background-color: rgb(220, 136, 20);
+    color: white;
+}
 
 
 
@@ -859,6 +994,27 @@ form .submit svg {
         margin: 50px auto;
         font-size: 26px;
     }
+
+    .purchase-container{
+        margin: 120px 0 41.05px;
+        padding: 0;
+    }
+
+    .purchase-container .purchasediv{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0;
+    }
+
+    .purchase-container .purchasediv p:nth-of-type(2){
+        display: none;
+    }
+
+    .book-summary {
+        width: 100%;
+    }
 }
 
 @media only screen and (max-width: 800px){
@@ -926,5 +1082,14 @@ form .submit svg {
     }
     .logo h1{
         font-size: 24px;
+    }
+
+    .book-summary {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 30px;
+        align-items: center;
+        text-align: center;
     }
 }

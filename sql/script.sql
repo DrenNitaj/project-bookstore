@@ -114,9 +114,28 @@ CREATE TABLE purchases (
     user_id INT,
     purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     total_amount DECIMAL(10, 2),
-    status ENUM('pending', 'completed', 'canceled') DEFAULT 'pending',
+    
+    -- Shipping info
+    delivery_method ENUM('standard', 'express') DEFAULT 'standard',
+    shipping_address TEXT,
+
+    -- Simulated payment info (encrypted storage)
+    cardholder_name VARCHAR(255),
+    encrypted_card_number VARCHAR(255),
+    encrypted_expiry_date VARCHAR(255),
+    encrypted_cvv VARCHAR(255),
+    
+    status ENUM(
+        'processed',    -- Payment successful, waiting to be shipped/delivered
+        'completed',    -- Delivered/shipped
+        'failed',       -- Payment or validation failed
+        'declined',     -- Admin canceled/declined
+        'refunded'      -- Refunded by admin/user
+    ) DEFAULT 'processed';
+    
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
+
 
 CREATE TABLE purchase_items (
     purchase_item_id INT PRIMARY KEY AUTO_INCREMENT,

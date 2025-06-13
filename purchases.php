@@ -1,22 +1,66 @@
 <?php
 
-    // Include the session check script
-    include('sessionCheck.php');
+// Include the session check script
+include('sessionCheck.php');
 
-    // connect with database
-    include_once("config.php");
+// connect with database (uses $conn = new PDO(...) in config.php)
+include_once("config.php");
 
-    // Include the script to remove expired items
-    include_once("removeExpiredItems.php");
+if(empty($_SESSION['user_id'])){
+    header("Location: signin.php");
+    exit();
+}
 
-    if(empty($_SESSION['user_id'])){
-        header("Location: signin.php");
+$user_id = $_SESSION['user_id'];
+
+// Fetch purchases and related books using PDO
+$query = "
+    SELECT 
+        p.purchase_id, 
+        p.purchase_date, 
+        p.total_amount,
+        p.shipping_address,
+        p.delivery_method,
+        p.status,
+        b.book_id,
+        b.title,
+        b.price,
+        b.cover_image_url,
+        b.author_name
+    FROM purchases p
+    LEFT JOIN purchase_items pi ON p.purchase_id = pi.purchase_id
+    LEFT JOIN books b ON pi.book_id = b.book_id
+    WHERE p.user_id = ?
+    ORDER BY p.purchase_date DESC
+";
+
+$stmt = $conn->prepare($query);
+$stmt->execute([$user_id]);
+$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Group books by purchase_id
+$purchases = [];
+foreach ($results as $row) {
+    $purchase_id = $row['purchase_id'];
+    if (!isset($purchases[$purchase_id])) {
+        $purchases[$purchase_id] = [
+            'date' => $row['purchase_date'],
+            'total' => $row['total_amount'],
+            'shipping_address' => $row['shipping_address'],
+            'delivery_method' => $row['delivery_method'],
+            'status' => $row['status'],
+            'books' => []
+        ];
     }
-
+    $purchases[$purchase_id]['books'][] = [
+        'book_id' => $row['book_id'],
+        'title' => $row['title'],
+        'price' => $row['price'],
+        'author_name' => $row['author_name'],
+        'cover_image_url' => $row['cover_image_url']
+    ];
+}
 ?>
-
-
-
 
 
 <!DOCTYPE html>
@@ -50,32 +94,67 @@
         <div class="menu-toggle">&#9776;</div>    
 	</header>
 
+    <main class="purchase-container" style="padding: 2rem;">
+        <h2 style="font-size: 28px;">My Purchases</h2>
 
-        
-        
+        <?php if (empty($purchases)): ?>
+            <h1 id="no-cart-items" class="heading">You haven't purchased any books yet.</h1>
+        <?php else: ?>
+            <?php foreach ($purchases as $purchase_id => $purchase): ?>
+                <?php
+                    // Determine status class and label
+                    $status = strtolower(trim($purchase['status'] ?? 'processed')); // default to 'processed'
 
-    <section id="section1" class="purchases_coming_soon">
-        <section class="books-contain activee" id="books1">
-            <div class="books-container">
-                <div class="books-text">
-                    <h1>Purchases Coming Soon</h1>
-                    <p>We're preparing a better way for you to buy books. Stay tuned!</p>
+                    $status_classes = [
+                        'processed' => 'status-processed',
+                        'completed' => 'status-completed',
+                        'failed' => 'status-failed',
+                        'declined' => 'status-declined',
+                        'refunded' => 'status-refunded'
+                    ];
+
+                    $status_class = $status_classes[$status] ?? 'status-processed';
+                ?>
+                <div class="purchase-card <?= $status_class ?>">
+                    <!-- Book cover (first book shown) -->
+                    <?php $firstBook = $purchase['books'][0]; ?>
+                    <div class="book-cover-info">
+                        <a href="signinBook.php?book_id=<?= urlencode($firstBook['book_id']) ?>" class="book-card-link">
+                            <div class="book-cover">
+                                <img src="images/coverimages/<?= htmlspecialchars($firstBook['cover_image_url']) ?>" alt="<?= htmlspecialchars($firstBook['title']) ?>">
+                            </div>
+                        </a>
+
+                        <!-- Book info -->
+                        <div class="book-info">
+                            <h3><?= htmlspecialchars($firstBook['title']) ?></h3>
+                            <p class="author">by <?= htmlspecialchars($firstBook['author_name']) ?></p>
+                            <p><strong>Price:</strong> $<?= number_format($firstBook['price'], 2) ?></p>
+                            <?php if (count($purchase['books']) > 1): ?>
+                                <p style="color: gray;">+ <?= count($purchase['books']) - 1 ?> more book<?= count($purchase['books']) > 2 ? 's' : '' ?></p>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    
+
+                    <!-- Purchase info -->
+                    <div class="purchase-details">
+                        <p><strong>Date:</strong><br><?= date('F j, Y, g:i a', strtotime($purchase['date'])) ?></p>
+                        <div class="purchase-meta-row">
+                            <div><strong>Total:</strong><br>$<?= number_format($purchase['total'], 2) ?></div>
+                            <div><strong>Shipping:</strong><br><?= htmlspecialchars($purchase['shipping_address']) ?></div>
+                            <div><strong>Delivery:</strong><br><?= htmlspecialchars($purchase['delivery_method']) ?></div>
+                        </div>
+                        <p><strong>Status:</strong><br><span class="status-label"><?= ucfirst($status) ?></span></p>
+                    </div>
                 </div>
-                <div class="buttons">
-                    <a href="signinBooks.php"><button>Browse for Books</button></a>
-                </div>
-            </div>
-        </section>
-    </section>
-
-
-
-
-    
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </main>
 
 
     <script>
-        let timeoutDuration = 1800000; // 30 minutes in milliseconds
+        let timeoutDuration = 1800000;
         let timeout;
 
         function resetTimeout() {
@@ -85,12 +164,11 @@
             }, timeoutDuration);
         }
 
-        // Detect user activities
-        window.onload = resetTimeout; // Reset timeout on page load
-        document.onmousemove = resetTimeout; // Reset timeout on mouse movement
-        document.onkeypress = resetTimeout; // Reset timeout on key press
-        document.onclick = resetTimeout; // Reset timeout on click
+        window.onload = resetTimeout;
+        document.onmousemove = resetTimeout;
+        document.onkeypress = resetTimeout;
+        document.onclick = resetTimeout;
     </script>
-    <!-- <script type="text/javascript" src="js/main.js?v=1.1"></script> -->
+    <script type="text/javascript" src="js/main.js?v=1.1"></script>
 </body>
 </html>

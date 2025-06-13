@@ -754,7 +754,6 @@ main {
 }
 
 #no-results:hover {
-    background-color: rgb(250, 250, 250);
     transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
@@ -1083,10 +1082,13 @@ form .user-table tbody tr:hover {
 
 #purchases, #lastLogin {
     padding: 20px;
-    border-bottom: 1px solid #ddd;
     background-color: #f9f9f9;
     transition: background-color 0.3s ease, color 0.3s ease;
     font-size: 16px;
+}
+
+#lastLogin {
+    border-bottom: 1px solid #ddd;
 }
 
 #purchases:last-child, #lastLogin:last-child {
@@ -1105,7 +1107,7 @@ form .user-table tbody tr:hover {
     text-align: center;
 }
 
-#lastLogin h3, #purchases .content, #no-purchases {
+#lastLogin h3, #purchases .purchase-stats, #no-purchases {
     font-size: 16px;
     color: #555;
     text-align: center;
@@ -1113,9 +1115,16 @@ form .user-table tbody tr:hover {
     font-weight: normal;
 }
 
-/* #no-purchases {
-    font-weight: normal;
-} */
+#purchases .purchase-stats:first-of-type{
+    font-size: 18px;
+}
+
+.purchases-link{
+    text-decoration: none;
+    display: inline-block;
+    border-bottom: 1px solid #ddd;
+}
+
 
 
 
@@ -1299,7 +1308,6 @@ form .user-table tbody tr:hover {
 }
 
 #no-comments:hover {
-    background-color: rgb(250, 250, 250);
     transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
@@ -1386,6 +1394,7 @@ form .user-table tbody tr:hover {
     text-align: center;
     font-family: 'Segoe UI', sans-serif;
     max-width: 90%;
+    border: 2px solid rgb(220, 136, 20);
 }
 
 .mood-selection h2 {
@@ -1442,6 +1451,15 @@ form .user-table tbody tr:hover {
     font-weight: bold;
     margin-top: 20px;
 }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1719,25 +1737,57 @@ form .user-table tbody tr:hover {
     }
 }
 
-@media only screen and (max-width: 600px){
+/* Existing media queries with added size adjustments */
+@media only screen and (max-width: 700px) {
     .mood-selection {
-        padding: 40px;
-        margin: 120.188px auto -60px;
+        padding: 20px 40px 40px;
+        margin: 120.188px auto -20px;
     }
 
-    #moodSentence{
+    #moodSentence {
         margin-top: 30px;
         margin-bottom: -20px;
     }
-}
 
-@media only screen and (max-width: 560px){
-    .mood-buttons {
-        display: flex;
+    .mood-buttons{
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 15px;
-        margin-top: 45px;
+    }
+
+    /* Make the h2 smaller */
+    .mood-selection h2 {
+        font-size: 1.2em;
+    }
+
+    /* Make buttons smaller */
+    .mood-btn {
+        padding: 15px 20px;
+        font-size: 0.9em;
+        min-width: 140px;
+        gap: 8px;
+        width: 30%;
+    }
+
+    .mood-btn i {
+        font-size: 1em;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    /* Further reduce text size and button size on very small screens */
+    .mood-selection h2 {
+        font-size: 1em;
+    }
+
+    .mood-btn {
+        padding: 12px 15px;
+        font-size: 0.8em;
+        min-width: 120px;
+        gap: 6px;
+    }
+
+    .mood-btn i {
+        font-size: 0.9em;
     }
 }

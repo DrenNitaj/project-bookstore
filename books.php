@@ -108,7 +108,7 @@
             <aside>
                 <a href="#" class="activee" data-genre="all-books">All books</a>
                 <a href="#" data-genre="new-books">New Books</a>
-                <a href="#" data-genre="best-sellers">Best Sellers</a>
+                <!-- <a href="#" data-genre="best-sellers">Best Sellers</a> -->
                 <a href="#" data-genre="fiction">Fiction</a>
                 <a href="#" data-genre="non-fiction">Non-Fiction</a>
                 <a href="#" data-genre="young-adult">Young Adult</a>

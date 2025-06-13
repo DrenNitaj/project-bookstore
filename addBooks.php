@@ -83,7 +83,7 @@
         </div>
 		<ul>
 			<li class="active"><a href="addBooks.php">BOOKS</a></li>
-            <li><a href="purchases.php">PURCHASES</a></li>
+            <li><a href="purchasesAdmin.php">PURCHASES</a></li>
             <li><a href="users.php">USERS</a></li>
             <!-- <li><a href="user.php" id="user"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#a0a0a0"><path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Zm80-80h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Zm0 400Z"/></svg>  ACCOUNT</a></li> -->
             <li><a action="logoutAdmin.php" href="logoutAdmin.php"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#a0a0a0"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/></svg>  LOG OUT</a></li>
@@ -100,7 +100,10 @@
 
     <div class="form-container">
         
-        <h1 class="heading">Add Books</h1>
+        <div style="margin-bottom: -20px" class="heading-searchBox">
+            <h1 class="heading">Add Books</h1>
+        </div>
+
         <form action="addBooksLogic.php" method="post">
 
             <div class="input-div">
@@ -141,15 +144,34 @@
     </div>
 
     <div class="table" id="books">
+
         <div class="heading-searchBox">
             <h1 class="heading">Books</h1>
+            <div class="books-filter purchases-filter">
+                <label for="deliveryFilter">Category:</label>
+                <select id="categoryFilter" onchange="search()">
+                    <option value="all">All Categories</option>
+                    <?php foreach ($categories as $category): ?>
+                        <option value="<?= strtolower($category['name']) ?>">
+                            <?= htmlspecialchars($category['name']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+
+                <label for="statusFilter">Search by:</label>
+                <select id="searchType">
+                    <option value="title">Title</option>
+                    <option value="author">Author</option>
+                </select>
+            </div>
             <form class="search-form" onsubmit="event.preventDefault(); search();">
-                <input type="text" class="searchBox" placeholder="Search for Books..." onkeyup="search()">
+                <input type="text" class="searchBox" placeholder="Search..." onkeyup="search()">
                 <button class="submit" type="submit">
                     <span class="material-symbols-outlined">search</span>
                 </button>
             </form>
         </div>
+
         <table id="table">
             <thead>
                 <tr>
@@ -208,6 +230,13 @@
             <h1 title="<?php echo $lastBook['title'];?>"><?php echo $lastBook['title'];?></h1>                            
             <h1>Book added successfully</h1>
         </div>
+    </div>
+
+
+    <div class="alert" id="updated-book-alert">  
+        <div>
+           <h1>Book updated successfully.</h1>
+        </div>                       
     </div>
 
 
@@ -279,31 +308,40 @@
 
         function search() {
             clearTimeout(debounceTimeout);
-            debounceTimeout = setTimeout(function() {
-                const query = document.querySelector('.searchBox').value.toLowerCase().trim();
-                const books = document.querySelectorAll('tbody tr');
+            debounceTimeout = setTimeout(function () {
+                const queryInput = document.querySelector('.searchBox');
+                const query = queryInput ? queryInput.value.toLowerCase().trim() : '';
+                const searchType = document.getElementById('searchType').value;
+                const selectedCategory = document.getElementById('categoryFilter').value.toLowerCase();
+
+                const rows = document.querySelectorAll('#table tbody tr');
                 let resultsFound = false;
 
-                books.forEach(function(book) {
-                    const title = book.querySelector('.title').textContent.toLowerCase();
-                    if (query === '' || title.includes(query)) {
-                        book.style.display = ''; // Show the row by using the default display property
+                rows.forEach(row => {
+                    const title = row.querySelector('.title')?.textContent.toLowerCase().trim() || '';
+                    const author = row.querySelector('[data-label="Author"]')?.textContent.toLowerCase().trim() || '';
+                    const category = row.querySelector('[data-label="Category"]')?.textContent.toLowerCase().trim() || '';
+
+                    const matchesSearch =
+                        query === '' ||
+                        (searchType === 'title' && title.includes(query)) ||
+                        (searchType === 'author' && author.includes(query));
+
+                    const matchesCategory = selectedCategory === 'all' || category === selectedCategory;
+
+                    if (matchesSearch && matchesCategory) {
+                        row.style.display = '';
                         resultsFound = true;
                     } else {
-                        book.style.display = 'none'; // Hide the row
+                        row.style.display = 'none';
                     }
                 });
 
-                // Show or hide the "No results found" message
-                const noResultsMessage = document.getElementById('no-results');
-                if (resultsFound) {
-                    noResultsMessage.style.display = 'none';
-                } else {
-                    noResultsMessage.style.display = 'block';
-                }
-
-            }, 300); // Adjust debounce delay as needed
+                const noResults = document.getElementById('no-results');
+                noResults.style.display = resultsFound ? 'none' : 'block';
+            }, 300);
         }
+
 
 
 
@@ -340,6 +378,40 @@
                 const url = new URL(window.location);
                 url.searchParams.delete('action');
                 url.searchParams.delete('book_id');
+                window.history.replaceState({}, document.title, url);
+            }
+        });
+
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle the URL parameters for the alert
+            const url = new URL(window.location);
+            const action = url.searchParams.get('action');
+
+            if (action === 'book-updated') {
+                showBookAlert();
+                setTimeout(hideBookAlert, 3000); // Hide after 3 seconds
+                removeUrlParams(); // Remove parameters from URL
+            }
+
+            function showBookAlert() {
+                const bookAlert = document.getElementById('updated-book-alert');
+                if (bookAlert) {
+                    bookAlert.style.display = 'flex'; // Show the alert
+                }
+            }
+
+            function hideBookAlert() {
+                const bookAlert = document.getElementById('updated-book-alert');
+                if (bookAlert) {
+                    bookAlert.style.display = 'none'; // Hide the alert
+                }
+            }
+
+            function removeUrlParams() {
+                const url = new URL(window.location);
+                url.searchParams.delete('action');
                 window.history.replaceState({}, document.title, url);
             }
         });

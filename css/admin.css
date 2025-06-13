@@ -340,7 +340,6 @@ ul li.active a::after{
 }
 
 #no-results:hover {
-    background-color: rgb(250, 250, 250);
     transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
@@ -365,6 +364,10 @@ ul li.active a::after{
     margin-bottom: 50px;
     margin-left: 40.64px;
     padding-top: 20px;
+}
+
+.purchases-heading-searchBox{
+    margin: -50px 0 0 40.640px;
 }
 
 .search-form {
@@ -458,6 +461,10 @@ ul li.active a::after{
     cursor: pointer;
 }
 
+.purchases-table tbody tr{
+    cursor: context-menu !important;
+}
+
 #table tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
@@ -484,11 +491,11 @@ ul li.active a::after{
     text-decoration: underline;
 }
 
-#table .edit-link {
+#table .edit-link, #table .approve-link {
     color: #007bff;
 }
 
-#table .delete-link {
+#table .delete-link, #table .cancel-link {
     color: #dc3545;
 }
 
@@ -499,6 +506,10 @@ ul li.active a::after{
     object-fit: cover;  /* Ensures the image covers the entire area without distortion */
     display: block;
     border-radius: 4px;
+}
+
+.cover-image-td {
+    height: 90px;
 }
 
 #table .price {
@@ -521,13 +532,75 @@ ul li.active a::after{
 }
 
 /* Style links within the table */
-#table .edit-link:hover {
+#table .edit-link:hover{
     color: #0056b3;
 }
 
-#table .delete-link:hover {
+#table .delete-link:hover{
     color: #c82333;
 }
+
+.purchases-filter {
+    margin: -5px 0 40px 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    flex-wrap: wrap;
+}
+
+.purchases-filter label {
+    font-weight: 600;
+    color: #333;
+}
+
+.purchases-filter select {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+    color: #333;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.purchases-filter select:focus {
+    border-color: rgb(220, 136, 20);
+}
+
+/* Action links */
+#table .action-link {
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+/* Color styles for each action */
+#table .action-link[data-action="complete"] {
+    color: #2e7d32; /* Green */
+}
+#table .action-link[data-action="complete"]:hover {
+    color: #256428; /* Slightly darker green */
+}
+
+#table .action-link[data-action="decline"] {
+    color: #dc3545; /* Red */
+}
+#table .action-link[data-action="decline"]:hover {
+    color: #b02a37; /* Slightly darker red */
+}
+
+#table .action-link[data-action="refund"] {
+    color: #ffc107; /* Yellow to match refunded status */
+}
+#table .action-link[data-action="refund"]:hover {
+    color: #d39e00; /* Slightly darker yellow */
+}
+
+
+
 
 /* Responsive styling */
 @media (max-width: 928px) {
@@ -617,9 +690,29 @@ ul li.active a::after{
     .heading-searchBox .submit{
         margin-top: 20px;
     }
+
+    .purchases-heading-searchBox input{
+        margin-top: -20px;
+    }
+
+    .purchases-heading-searchBox .submit{
+        margin-top: -20px;
+    }
     
+    .purchases-filter {
+        margin: -5px 0 0 0;
+    }
     
-    
+}
+
+@media (max-width: 730px){
+    .purchases-filter {
+        margin: 25px 0 0 0 !important;
+    }
+
+    .books-filter {
+        flex-direction: column;
+    }
 }
 
 /* Additional styles for even better responsiveness */
@@ -644,6 +737,10 @@ ul li.active a::after{
         width: 30px;
         height: 40px;
         right: -80%;
+    }
+
+    .cover-image-td {
+        height: 50px;
     }
 
     #table .description {
@@ -713,7 +810,7 @@ ul li.active a::after{
 
 
 /* General Alert Styles */
-#book-alert {
+.alert {
     width: 420px;
     position: fixed;
     top: 20px;
@@ -732,27 +829,27 @@ ul li.active a::after{
     border-left: 5px solid #28a745; /* Green border to indicate success */
 }
 
-#book-alert div {
+.alert div {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start; /* Align text to the left for better readability */
 }
 
-#book-alert img {
+.alert img {
     width: 60px; /* Slightly larger image for better visibility */
     height: auto;
     border-radius: 8px;
     object-fit: cover; /* Ensure image doesn't distort */
 }
 
-#book-alert h1:first-of-type {
+.alert h1:first-of-type {
     font-size: 18px;
     color: #333333; /* Darker text for better contrast */
     margin: 0;
 }
 
-#book-alert h1:nth-of-type(2), #book-alert h1:nth-of-type(3) {
+.alert h1:nth-of-type(2), .alert h1:nth-of-type(3) {
     font-size: 16px;
     color: #555555; /* Lighter text for secondary information */
     margin: 5px 0 0;
@@ -763,44 +860,63 @@ ul li.active a::after{
 
 
 
+.profile-title{
+    text-align: center;
+    margin-top: 130.188px;
+    margin-bottom: 40px;
+}
+
+
 .user-table-container {
-    margin-top: 96.188px;
     display: flex;
-    justify-content: flex-start;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: flex-start;
     flex-wrap: wrap;
-    padding: 60px 40px;
-    gap: 40px 10%;
+    width: 100%;
+    gap: 40px 20px;
 }
 
 .user-table {
-    width: 45%;
-    min-width: 380px;
+    width: 60%;
+    min-width: 350px;
     border-collapse: collapse;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    overflow: hidden;
+    overflow: visible;
+    margin: 0 30px;
 }
 
 .user-table thead {
-    background: #1e1e1e;
+    background-color: black;
     color: #fff;
+    height: 20px;
 }
 
-.user-table thead th {
-    padding: 18px 14px;
-    border-bottom: 2px solid #ddd;
-    text-align: left;
-    font-weight: bold;
-    text-transform: uppercase;
+/* Apply rounded corners to the top of the table */
+.user-table thead th:first-child {
+    border-top-left-radius: 8px;
+}
+
+.user-table thead th:last-child {
+    border-top-right-radius: 8px;
 }
 
 .user-table tbody tr {
     transition: background-color 0.3s ease;
 }
 
+.user-table tbody tr:nth-child(odd){
+    background-color: whitesmoke;
+}
+
 .user-table tbody tr:nth-child(even) {
     background-color: #f9f9f9;
+}
+
+form .user-table tbody tr:hover {
+    outline: none;
+    box-shadow: none;
 }
 
 .user-table tbody tr:hover {
@@ -815,53 +931,227 @@ ul li.active a::after{
 
 .user-table td {
     text-align: left;
+    font-size: 16px;
+    color: #333;
 }
 
 .user-table td:first-child {
     font-weight: bold;
-    color: #333;
+    color: #1e1e1e;
 }
 
 .user-table td:last-child {
     color: #555;
+    text-transform: none;
 }
 
-/* Add transitions for smoother hover effects */
+/* Smooth hover effect for the table rows and content */
 .user-table tbody tr, .user-table td {
     transition: background-color 0.3s, color 0.3s;
 }
 
-#purchases{
-    width: 45%;
-    min-width: 380px;
+.user-table tfoot{
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
-#purchases h1{
+.user-table tfoot td{
+    background-color: whitesmoke;
+}
+
+.user-table tfoot td:nth-of-type(1){
+    border-bottom-left-radius: 8px;
+}
+
+.user-table tfoot td:nth-of-type(2){
+    border-bottom-right-radius: 8px;
+}
+
+
+
+#accountInfoHeader {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 16px 20px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
     text-align: center;
 }
 
-#no-purchases {
+#accountInfo {
+    width: 30%;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 30px;
+    font-family: inherit;
+    color: #333;
+}
+
+#purchases, #lastLogin {
+    padding: 20px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 16px;
+}
+
+#lastLogin {
+    border-bottom: 1px solid #ddd;
+}
+
+#purchases:last-child, #lastLogin:last-child {
+    border-bottom: none;
+}
+
+#purchases:hover, #lastLogin:hover {
+    background-color: #e9ecef;
+}
+
+#purchases h1, #lastLogin h1 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #1e1e1e;
+    text-align: center;
+}
+
+#lastLogin h3, #purchases .purchase-stats, #no-purchases {
+    font-size: 16px;
+    color: #555;
+    text-align: center;
+    margin: 0;
+    font-weight: normal;
+}
+
+#purchases .purchase-stats:first-of-type{
+    font-size: 18px;
+}
+
+.purchases-link{
+    text-decoration: none;
+    display: inline-block;
+    border-bottom: 1px solid #ddd;
+}
+
+
+
+
+.user-reviews-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0 60px;
+}
+
+/* Container for all reviews */
+.reviews-container {
+    width: 80%;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Adds spacing between reviews */
+}
+
+.review {
+    position: relative; /* Ensures absolute elements inside are positioned relative to this block */
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.2s ease;
+    min-height: 100px; /* Adjust height to ensure enough space for the delete button */
+}
+
+.review:hover {
+    border-color: rgb(220, 136, 20);
+    box-shadow: 0 0 4px rgba(220, 136, 20, 0.5);
+}
+
+/* Review header with user info and date */
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.review-user {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.review-date {
+    font-size: 14px;
+    color: #888;
+}
+
+/* Review comment text */
+.review-comment {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+    font-style: italic;
+}
+
+.delete-review {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer; /* Optional, makes it clear it's clickable */
+    background-color: #000000;
+    border: none;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-review:hover{
+    background-color: #d68814;
+}
+
+.delete-review svg{
+    fill: #ffffff; /* Changes icon color */
+    width: 24px;
+    height: 24px;
+}
+
+
+
+#no-comments {
     font-size: 1.8rem;
     font-weight: bold;
     color: rgb(138, 138, 138);
     text-align: center;
-    margin: 50px auto;
-    padding: 60px 20px;
+    margin: 20px 40px 40px;
+    padding: 20px;
     border: 2px dashed rgb(220, 136, 20);
     border-radius: 10px;
     background-color: white;
-    width: 80%;
-    max-width: 500px;
+    width: 100%;
+    max-width: 300px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform .2s ease-in-out, background-color .2s ease-in-out, box-shadow .2s ease-in-out;
     cursor: default;
 }
 
-#no-purchases:hover {
-    background-color: rgb(250, 250, 250);
+#no-comments:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
+
+
 
 
 
@@ -1005,6 +1295,11 @@ ul li.active a::after{
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        margin-bottom: 40px;
+    }
+
+    .profile-title{
+        margin-bottom: 30px;
     }
 }
 

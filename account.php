@@ -3,58 +3,60 @@
     // Include the session check script
     include('sessionCheck.php');
 
-    // connect with database
+    // Connect with the database
     include_once("config.php");
 
-    if(empty($_SESSION['user_id'])){
+    if (empty($_SESSION['user_id'])) {
         header("Location: signin.php");
+        exit();
     }
 
-
     $user_id = $_SESSION['user_id'];
-    
-    // Fetch book details using PDO
+
+    // Fetch user details
     $sql = $conn->prepare("SELECT * FROM users WHERE user_id = :user_id");
     $sql->bindParam(':user_id', $user_id, PDO::PARAM_INT);
     $sql->execute();
     $user = $sql->fetch(PDO::FETCH_ASSOC);
 
-
-
-    // Assuming $conn is your PDO connection
-    $sql = "
-    SELECT COUNT(*) as purchase_count
-    FROM purchases
-    WHERE user_id = :user_id
-    ";
-
+    // Fetch total number of purchases
+    $sql = "SELECT COUNT(*) as purchase_count FROM purchases WHERE user_id = :user_id";
     $sqlPrep = $conn->prepare($sql);
-
-    // Bind the user_id parameter
     $sqlPrep->execute(['user_id' => $user_id]);
-
-    // Fetch the count
     $result = $sqlPrep->fetch(PDO::FETCH_ASSOC);
-
-    // Check the purchase count
     $purchaseCount = $result['purchase_count'];
-
     $hasNoPurchases = ($purchaseCount == 0);
 
-
-
-
+    // Fetch breakdown of purchase statuses
+    $sql = "
+        SELECT 
+            COUNT(*) AS total,
+            SUM(status = 'processed') AS processed,
+            SUM(status = 'completed') AS completed,
+            SUM(status = 'failed') AS failed,
+            SUM(status = 'declined') AS declined,
+            SUM(status = 'refunded') AS refunded
+        FROM purchases
+        WHERE user_id = :user_id
+    ";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute(['user_id' => $user_id]);
+    $purchaseStats = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // Fetch all reviews by the logged-in user
     $sql = $conn->prepare("
-        SELECT reviews.review_id, reviews.book_id, reviews.comment, reviews.review_date, books.title 
+        SELECT 
+            reviews.review_id, 
+            reviews.book_id, 
+            reviews.comment, 
+            reviews.review_date, 
+            books.title 
         FROM reviews 
         JOIN books ON reviews.book_id = books.book_id 
         WHERE reviews.user_id = :user_id
     ");
     $sql->bindParam(':user_id', $user_id, PDO::PARAM_INT);
     $sql->execute();
-
     $userReviews = $sql->fetchAll(PDO::FETCH_ASSOC);
 
 
@@ -158,19 +160,27 @@
                     </tr>
                 </tfoot>
             </table>
+            
             <div id="accountInfo">
                 <div id="accountInfoHeader"></div>
 
-                <div id="purchases">
-                    <h1>Purchases</h1>
-                    <?php if($hasNoPurchases){ ?>
-                        <h2 id="no-purchases" class="heading">No Purchases</h2>
-                    <?php } else { ?>
-                        <div>
-                            <!-- Purchases content -->
-                        </div> 
-                    <?php } ?>       
-                </div>
+                
+                <a class="purchases-link" href="purchases.php">
+                    <div id="purchases">
+                        <h1>Purchases</h1>
+
+                        <?php if ($hasNoPurchases): ?>
+                            <h3 id="no-purchases" class="heading">No Purchases</h3>
+                        <?php else: ?>
+                            <h3 class="purchase-stats">Total Purchases: <?= $purchaseStats['total'] ?></h3>
+                            <h3 class="purchase-stats">Processed: <?= $purchaseStats['processed'] ?></h3>
+                            <h3 class="purchase-stats">Completed: <?= $purchaseStats['completed'] ?></h3>
+                            <h3 class="purchase-stats">Failed: <?= $purchaseStats['failed'] ?></h3>
+                            <h3 class="purchase-stats">Declined: <?= $purchaseStats['declined'] ?></h3>
+                            <h3 class="purchase-stats">Refunded: <?= $purchaseStats['refunded'] ?></h3>
+                        <?php endif; ?>
+                    </div>
+                </a>
 
                 <div id="lastLogin">
                     <h1>Last login</h1>

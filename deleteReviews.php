@@ -59,6 +59,9 @@ if (isset($_SERVER['HTTP_REFERER'])) {
         case 'account.php':
             $redirectUrl = "account.php?action=review-deleted&book_id=" . $book_id;
             break;
+            case 'user.php':
+            $redirectUrl = "user.php?user_id=" . $review['user_id'] . "&action=review-deleted&book_id=" . $book_id;
+            break;
         default:
             $redirectUrl = "account.php?action=review-deleted&book_id=" . $book_id; // fallback to account
             break;

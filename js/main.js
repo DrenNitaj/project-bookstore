@@ -269,8 +269,68 @@ document.querySelectorAll('.books-wrapper .book').forEach(function(newBook) {
 
 
 
+document.addEventListener('DOMContentLoaded', function() {
+    const learnMoreBtn = document.getElementById('learnMoreBtn');
+    const aboutOverlay = document.getElementById('aboutOverlay');
+    const closeOverlay = document.getElementById('closeOverlay');
 
-document.getElementById('scrollToTop').addEventListener('click', function (e) {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Ensure overlay is hidden on load
+    aboutOverlay.style.display = 'none';
+    document.body.style.overflow = 'auto';
+
+    if (learnMoreBtn && aboutOverlay && closeOverlay) {
+        learnMoreBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            aboutOverlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeOverlay.addEventListener('click', function() {
+            aboutOverlay.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        aboutOverlay.addEventListener('click', function(e) {
+            if (e.target === aboutOverlay) {
+                aboutOverlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+    }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Force reload if page is loaded via back/forward cache
+window.addEventListener("pageshow", function (event) {
+    if (event.persisted || (window.performance && window.performance.getEntriesByType("navigation")[0].type === "back_forward")) {
+        location.reload();
+    }
+});
+

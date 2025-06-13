@@ -70,7 +70,7 @@
 
         $sqlPrep->execute();
 
-        header("Location: addBooks.php#books");
+        header("Location: addBooks.php?action=book-updated#books");
 
         }
 

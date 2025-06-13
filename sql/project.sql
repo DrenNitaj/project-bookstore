@@ -3,18 +3,13 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2024 at 06:25 PM
+-- Generation Time: Jun 13, 2025 at 05:10 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-
-
--- Ensure the database exists
-CREATE DATABASE IF NOT EXISTS `project`;
-USE `project`;
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -73,7 +68,7 @@ CREATE TABLE `books` (
 --
 
 INSERT INTO `books` (`book_id`, `title`, `category_id`, `author_name`, `price`, `stock_quantity`, `description`, `cover_image_url`, `created_at`) VALUES
-(1, 'Harry Potter and the Sorcerer\'s Stone', 4, 'J.K. Rowling', 11.00, 19, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'harry_potter_1.jpg', '2024-08-04 17:35:21'),
+(1, 'Harry Potter and the Sorcerer\'s Stone', 4, 'J.K. Rowling', 11.00, 139, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'harry_potter_1.jpg', '2024-08-04 17:35:21'),
 (2, 'Harry Potter and the Chamber of Secrets', 4, 'J.K. Rowling', 11.00, 19, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'harry_potter_2.jpg', '2024-08-04 17:45:05'),
 (3, 'Harry Potter and the Prisoner of Azkaban', 4, 'J.K. Rowling', 11.00, 20, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'harry_potter_3.jpg', '2024-08-04 17:45:58'),
 (4, 'Harry Potter and the Goblet of Fire', 4, 'J.K. Rowling', 11.00, 0, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'harry_potter_4.jpg', '2024-08-04 17:46:57'),
@@ -84,7 +79,7 @@ INSERT INTO `books` (`book_id`, `title`, `category_id`, `author_name`, `price`, 
 (9, 'Charlotte\'s Web', 4, 'E.B. White', 10.40, 20, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'charlottes_web.jpg', '2024-08-04 17:55:21'),
 (10, 'Hamlet', 7, 'William Shakespeare', 3.90, 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'hamlet.jpg', '2024-08-04 17:57:22'),
 (11, 'Death of a Salesman', 7, 'Arthur Miller', 11.65, 19, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'death_of_a_salesman.jpg', '2024-08-04 17:59:27'),
-(12, 'The Republic', 9, 'Plato', 14.20, 20, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'the_republic.jpg', '2024-08-04 18:06:21'),
+(12, 'The Republic', 9, 'Plato', 14.20, 17, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'the_republic.jpg', '2024-08-04 18:06:21'),
 (13, 'Why We Sleep', 9, 'Matthew Walker', 14.00, 20, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'why_we_sleep.jpg', '2024-08-04 18:09:07'),
 (14, 'Pride and Prejudice', 1, 'Jane Austen', 3.90, 20, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'pride_and_prejudice.jpg', '2024-08-04 18:12:58'),
 (15, 'The Underground Railroad', 1, 'Colson Whitehead', 11.99, 0, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'the_underground_railroad.jpg', '2024-08-04 18:16:09'),
@@ -95,7 +90,7 @@ INSERT INTO `books` (`book_id`, `title`, `category_id`, `author_name`, `price`, 
 (20, 'Born a Crime', 2, 'Trevor Noah', 14.00, 0, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'born_a_crime.jpg', '2024-08-05 14:32:11'),
 (21, 'Illiad', 6, 'Homer', 12.90, 20, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'iliad.jpg', '2024-08-05 14:35:19'),
 (22, 'Odyssey', 6, 'Homer', 13.00, 20, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'odyssey.jpg', '2024-08-05 14:37:23'),
-(23, 'The Tao Te Ching', 8, 'Lao Tzu', 25.90, 20, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'tao_te_ching.jpg', '2024-08-05 14:40:54'),
+(23, 'The Tao Te Ching', 8, 'Lao Tzu', 25.90, 18, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'tao_te_ching.jpg', '2024-08-05 14:40:54'),
 (24, 'The Power of Now: A Guide to Spiritual Enlightenment', 8, 'Eckhart Tolle', 16.90, 20, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'the_power_of_now.jpg', '2024-08-05 14:42:48'),
 (25, 'Anne of Green Gables', 3, 'Lucy Maud Montgomery', 3.90, 0, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'anne_of_green_gables.jpg', '2024-08-05 14:46:00'),
 (26, 'Children of Blood and Bone', 3, 'Tomi Adeyemi', 19.40, 21, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'children_of_blood_and_bone.jpg', '2024-08-05 14:50:46'),
@@ -126,7 +121,8 @@ CREATE TABLE `cart_items` (
 INSERT INTO `cart_items` (`cart_item_id`, `cart_id`, `book_id`, `added_time`) VALUES
 (49, 3, 2, '2024-09-12 10:15:23'),
 (156, 4, 1, '2024-11-09 13:26:19'),
-(159, 5, 2, '2024-11-16 13:39:02');
+(159, 5, 2, '2024-11-16 13:39:02'),
+(183, 1, 1, '2025-06-12 17:32:33');
 
 -- --------------------------------------------------------
 
@@ -200,7 +196,18 @@ INSERT INTO `deleted_cart_items` (`deleted_cart_item_id`, `user_id`, `book_id`, 
 (24, 1, 1, NULL, '2024-10-25 18:39:34'),
 (25, 1, 2, NULL, '2024-11-16 11:59:13'),
 (26, 8, 1, NULL, '2024-11-16 13:39:09'),
-(27, 1, 2, NULL, '2024-11-16 13:43:36');
+(27, 1, 2, NULL, '2024-11-16 13:43:36'),
+(28, 1, 1, NULL, '2025-05-18 13:21:10'),
+(29, 1, 10, NULL, '2025-05-22 20:05:48'),
+(30, 1, 6, NULL, '2025-05-22 20:07:21'),
+(31, 1, 1, NULL, '2025-05-22 20:19:52'),
+(32, 1, 1, NULL, '2025-05-24 18:37:14'),
+(33, 1, 1, NULL, '2025-05-24 18:41:39'),
+(34, 1, 1, NULL, '2025-05-24 18:46:34'),
+(35, 1, 1, NULL, '2025-05-25 13:01:46'),
+(36, 1, 1, NULL, '2025-06-09 15:59:42'),
+(37, 9, 1, NULL, '2025-06-09 16:11:33'),
+(38, 1, 1, NULL, '2025-06-09 16:34:47');
 
 -- --------------------------------------------------------
 
@@ -235,7 +242,12 @@ INSERT INTO `deleted_wishlist_items` (`deleted_wishlist_item_id`, `user_id`, `bo
 (12, 2, 10, 0, '2024-09-10 09:10:20'),
 (13, 2, 10, 0, '2024-09-10 09:10:27'),
 (14, 1, 10, 0, '2024-09-10 09:12:50'),
-(15, 1, 9, 0, '2024-10-26 11:49:11');
+(15, 1, 9, 0, '2024-10-26 11:49:11'),
+(16, 1, 2, 0, '2025-03-30 18:19:35'),
+(17, 1, 23, 0, '2025-03-30 18:19:49'),
+(18, 1, 21, 0, '2025-05-24 14:45:59'),
+(19, 1, 1, 0, '2025-06-09 15:59:31'),
+(20, 1, 25, 0, '2025-06-11 15:31:36');
 
 -- --------------------------------------------------------
 
@@ -248,8 +260,26 @@ CREATE TABLE `purchases` (
   `user_id` int(11) DEFAULT NULL,
   `purchase_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `total_amount` decimal(10,2) DEFAULT NULL,
-  `status` enum('pending','completed','canceled') DEFAULT 'pending'
+  `status` enum('processed','completed','failed','declined','refunded') DEFAULT 'processed',
+  `delivery_method` varchar(20) DEFAULT NULL,
+  `shipping_address` text DEFAULT NULL,
+  `cardholder_name` varchar(255) DEFAULT NULL,
+  `encrypted_card_number` varchar(255) DEFAULT NULL,
+  `encrypted_expiry_date` varchar(10) DEFAULT NULL,
+  `encrypted_cvv` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `purchases`
+--
+
+INSERT INTO `purchases` (`purchase_id`, `user_id`, `purchase_date`, `total_amount`, `status`, `delivery_method`, `shipping_address`, `cardholder_name`, `encrypted_card_number`, `encrypted_expiry_date`, `encrypted_cvv`) VALUES
+(1, 1, '2025-06-10 20:54:16', 11.00, 'refunded', 'standard', 'Kosove', 'Filan Fisteku', 'MTIzNDU2Nzg5MDEyMw==', 'MDcvMjU=', 'MDAwMA=='),
+(2, 1, '2025-06-11 12:24:58', 8.89, 'completed', 'express', 'Prishtine', 'Filan Fisteku', 'MTIzNDU2Nzg5MDEyMzQ1', 'MDgvMjU=', 'MDAwMQ=='),
+(3, 1, '2025-06-12 11:46:09', 51.80, 'completed', 'standard', 'Prishtine', 'Filan Fisteku', 'MTIzNDU2Nzg5MDEyMzQ1', 'MTIvMjU=', 'MDAwMg=='),
+(6, 1, '2025-06-12 12:32:44', 0.00, 'failed', 'express', 'Prishtine', 'Filan Fisteku', 'NjQ5ODQ4NTE1NTQxNDU=', 'MDEvMjU=', 'MDAwMw=='),
+(7, 1, '2025-06-12 17:34:16', 0.00, 'failed', 'standard', 'Kosove', 'Filan Fisteku', 'NTQ5NDk2NDQxODY0NTg0', 'MDEvMjU=', 'MDAwNA=='),
+(8, 1, '2025-06-12 17:37:02', 47.59, 'refunded', 'express', 'Prishtine', 'Filan Fisteku', 'MTMxNTE4NDgxNTQxMjE=', 'MDgvMjU=', 'MDAwNQ==');
 
 -- --------------------------------------------------------
 
@@ -264,6 +294,18 @@ CREATE TABLE `purchase_items` (
   `quantity` int(11) DEFAULT NULL,
   `price` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `purchase_items`
+--
+
+INSERT INTO `purchase_items` (`purchase_item_id`, `purchase_id`, `book_id`, `quantity`, `price`) VALUES
+(1, 1, 1, 1, 11.00),
+(2, 2, 10, 1, 3.90),
+(3, 3, 23, 2, 25.90),
+(4, 6, 36, 1, 5.20),
+(5, 7, 1, 1, 11.00),
+(6, 8, 12, 3, 14.20);
 
 -- --------------------------------------------------------
 
@@ -285,8 +327,10 @@ CREATE TABLE `reviews` (
 
 INSERT INTO `reviews` (`review_id`, `book_id`, `user_id`, `comment`, `review_date`) VALUES
 (12, 2, 3, 'Darker and more mysterious than its predecessor, this installment delves deeper into the wizarding world’s lore with an engaging plot and a twisty mystery.', '2024-09-13 20:18:06'),
-(15, 1, 1, 'An enchanting story full of magic, friendship, and adventure. A must-read for all ages!', '2024-11-09 13:25:54'),
-(16, 4, 8, 'An enchanting story full of magic, friendship, and adventure. A must-read for all ages!', '2024-11-16 13:38:04');
+(16, 4, 8, 'An enchanting story full of magic, friendship, and adventure. A must-read for all ages!', '2024-11-16 13:38:04'),
+(22, 3, 1, 'Darker and more mysterious than its predecessor, this installment delves deeper into the wizarding world’s lore with an engaging plot and a twisty mystery.', '2025-06-11 19:26:32'),
+(23, 3, 2, 'Darker and more mysterious than its predecessor, this installment delves deeper into the wizarding world’s lore with an engaging plot and a twisty mystery.', '2025-06-11 19:26:52'),
+(24, 1, 1, 'An enchanting story full of magic, friendship, and adventure. A must-read for all ages!', '2025-06-12 17:29:42');
 
 -- --------------------------------------------------------
 
@@ -309,7 +353,8 @@ INSERT INTO `shopping_cart` (`cart_id`, `user_id`, `created_at`) VALUES
 (2, 2, '2024-08-18 11:18:10'),
 (3, NULL, '2024-08-25 13:20:56'),
 (4, 3, '2024-11-09 13:26:19'),
-(5, 8, '2024-11-16 13:38:58');
+(5, 8, '2024-11-16 13:38:58'),
+(6, 9, '2025-06-09 16:11:30');
 
 -- --------------------------------------------------------
 
@@ -335,14 +380,15 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `name`, `surname`, `username`, `email`, `password`, `phone_number`, `address`, `created_at`, `last_login`) VALUES
-(1, 'Dreni', 'Nitaj', 'drennitaj1', 'contact@email.com', '$2y$10$al6L9z/AiCQ962FyvIuSJuMR.JBZlAavY0LcZy2W.gpp.Wtyt7N1q', '044123456', 'Kosovë / Prishtinë / Rruga C', '2024-07-03 19:23:58', '2024-11-16 15:23:15'),
-(2, 'Dren', 'Nitaj', 'drennitaj2', 'contact@gmail.com', '$2y$10$L9A.ekF7pBTHWE67uVYsi.Crlol.oXJd.9mgib7b/qUbL.RQofnB.', '049123456', 'Kosovë / Prishtinë / Rruga B', '2024-07-03 19:37:02', '2024-11-09 13:51:10'),
+(1, 'Dren', 'Nitaj', 'drennitaj1', 'contact@email.com', '$2y$10$ZmbiKsMJKIiLvxyS4W6RdOBtGtv83ckqh.4N4aWAuM/QEQBDWz542', '044123456', 'Kosovë / Prishtinë / Rruga C', '2024-07-03 19:23:58', '2025-06-12 20:06:43'),
+(2, 'Dren', 'Nitaj', 'drennitaj2', 'contact@gmail.com', '$2y$10$L9A.ekF7pBTHWE67uVYsi.Crlol.oXJd.9mgib7b/qUbL.RQofnB.', '049123456', 'Kosovë / Prishtinë / Rruga B', '2024-07-03 19:37:02', '2025-06-11 22:47:09'),
 (3, 'User', 'User', 'user1', 'user@email.com', '$2y$10$0GZsEeH6A3ZfbonxseHjIOKcjrGEinh8UA5e9iMpg8O7ayygKcEem', '', '', '2024-08-20 13:43:39', '2024-11-09 14:26:09'),
 (4, 'User', 'User', 'user2', 'user@gmail.com', '$2y$10$nzc5krR2m4Jr8FOTVsM.BOW5bM1RqeA/CsIuJSWD2kkl/0vMSlxtS', '', '', '2024-08-30 18:12:07', NULL),
 (5, 'User', 'User', 'user3', 'user@hotmail.com', '$2y$10$mfL1kBp3YiAXSAUlpbjmU.u8aLj/JhnNDxegzu7yxEWoDpQV/heme', '', '', '2024-08-30 18:15:37', NULL),
 (6, 'User', 'User', 'user4', 'test@email.com', '$2y$10$K1y78OHJfhvOqyRnaHwmLOvxaEZBNdmu7a.L0Y6FYGwEWGba14vDy', '', '', '2024-11-16 10:16:16', NULL),
 (7, 'User', 'User', 'user5', 'test@hotmail.com', '$2y$10$P9YXMYvmvRRzwhCyL3f5sOgR/GFP1l2e6CtKvvh6Jf5Gnhsgev2v6', '', '', '2024-11-16 10:18:30', NULL),
-(8, 'User', 'User', 'user6', 'test@gmail.com', '$2y$10$iJQZX2DZnDsYoh61BvZ6FOFhtZjWCeD5rfH02p87ZHZic8EN0Dms2', '', '', '2024-11-16 13:37:39', '2024-11-16 14:37:39');
+(8, 'User', 'User', 'user6', 'test@gmail.com', '$2y$10$iJQZX2DZnDsYoh61BvZ6FOFhtZjWCeD5rfH02p87ZHZic8EN0Dms2', '', '', '2024-11-16 13:37:39', '2024-11-16 14:37:39'),
+(9, 'Festa', 'Rexhepi', 'festa', 'festa@gmail.com', '$2y$10$Mu74l.TjtdDPQ.MiRSLgO.UxE/YWbURyZgwpYYc7WyMuH/1V.My3u', '', '', '2025-06-09 16:02:36', '2025-06-09 18:02:36');
 
 -- --------------------------------------------------------
 
@@ -376,7 +422,8 @@ CREATE TABLE `wishlists` (
 INSERT INTO `wishlists` (`wishlist_id`, `user_id`, `created_at`) VALUES
 (1, 1, '2024-08-18 11:41:43'),
 (2, 2, '2024-08-24 12:06:24'),
-(3, 8, '2024-11-16 13:39:18');
+(3, 8, '2024-11-16 13:39:18'),
+(4, 9, '2025-06-09 16:04:15');
 
 -- --------------------------------------------------------
 
@@ -395,14 +442,17 @@ CREATE TABLE `wishlist_items` (
 --
 
 INSERT INTO `wishlist_items` (`wishlist_item_id`, `wishlist_id`, `book_id`) VALUES
-(66, 1, 23),
 (76, 1, 10),
 (77, 1, 13),
-(78, 1, 21),
 (79, 1, 22),
-(80, 1, 2),
-(81, 1, 25),
-(82, 3, 3);
+(82, 3, 3),
+(84, 4, 6),
+(85, 4, 3),
+(86, 4, 7),
+(87, 4, 19),
+(88, 1, 37),
+(89, 1, 12),
+(90, 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -535,7 +585,7 @@ ALTER TABLE `books`
 -- AUTO_INCREMENT for table `cart_items`
 --
 ALTER TABLE `cart_items`
-  MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
+  MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -547,43 +597,43 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `deleted_cart_items`
 --
 ALTER TABLE `deleted_cart_items`
-  MODIFY `deleted_cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `deleted_cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `deleted_wishlist_items`
 --
 ALTER TABLE `deleted_wishlist_items`
-  MODIFY `deleted_wishlist_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `deleted_wishlist_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `purchase_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `purchase_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `purchase_items`
 --
 ALTER TABLE `purchase_items`
-  MODIFY `purchase_item_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `purchase_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `shopping_cart`
 --
 ALTER TABLE `shopping_cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `website_reviews`
@@ -595,13 +645,13 @@ ALTER TABLE `website_reviews`
 -- AUTO_INCREMENT for table `wishlists`
 --
 ALTER TABLE `wishlists`
-  MODIFY `wishlist_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `wishlist_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `wishlist_items`
 --
 ALTER TABLE `wishlist_items`
-  MODIFY `wishlist_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `wishlist_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- Constraints for dumped tables

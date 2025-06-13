@@ -28,22 +28,22 @@ This is a full-stack online bookstore web application built with **PHP**, **MySQ
 ## 🖼️ Screenshots
 
 ### 1. 🔐 Sign In / Sign Up Pages
-[Screenshot goes here]
+![Sign In Screenshot](images/screenshots/signin.png)
 
 ### 2. 🏠 Homepage / Book Listing
-[Screenshot goes here]
+![Homepage Screenshot](images/screenshots/homepage.png)
 
 ### 3. 🛒 Cart and Wishlist Pages
-[Screenshot goes here]
+![Cart Screenshot](images/screenshots/wishlist.png)
 
 ### 4. 🤖 AI Recommendations Page
-[Screenshot goes here]
+![AI Screenshot](images/screenshots/ai-recommendations.png)
 
 ### 5. 🧾 Purchase History
-[Screenshot goes here]
+![History Screenshot](images/screenshots/purchase-history.png)
 
 ### 6. 🔧 Admin Dashboard (Manage Books)
-[Screenshot goes here]
+![Admin Screenshot](images/screenshots/admin-dashboard.png)
 
 ---
 
